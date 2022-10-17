@@ -338,12 +338,14 @@
                         </div>
                     </div>
                     <p>
-                        <textarea name="content" id="text_field" cols="50" rows="5" placeholder="내용 작성하기""></textarea>
-
+                        <textarea name="content" id="text_field" cols="50" rows="5" placeholder="내용 작성하기"></textarea>
+                </form>
+                    {% if cm.author_id == user.id %}
                     </p><div class="buttons">
                     <input class="submit_btn" type="submit" value="수정">
                     <input class="submit_btn" type="submit" value="삭제"></div>
-                </form>
+                    {% endif %}
+               
 
             </div>
 
