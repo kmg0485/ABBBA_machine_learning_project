@@ -330,21 +330,21 @@
             <div class="post_form_container">
                 <form action="#" method="POST" class="post_form" enctype="multipart/form-data">
                     {% csrf_token %}<div class="title">
-                        DETAIL
+                        상세 글
                     </div>
                     <div class="preview">
-                        <div>
-                            <img src="https://www.myperfectcolor.com/repositories/images/colors/valspar-92-16b-vintage-pink-paint-color-match-2.jpg">
-                        </div>
+                        
+                        <img style=" display:flex; width:100%;  " src="{{post.photo.url}}"/>
                     </div>
                     <p>
-                        <textarea name="content" id="text_field" cols="50" rows="5" placeholder="내용 작성하기"></textarea>
+                        <div>{{post.content}}</div>
+
                 </form>
-                    {% if cm.author_id == user.id %}
+                    
                     </p><div class="buttons">
                     <input class="submit_btn" type="submit" value="수정">
                     <input class="submit_btn" type="submit" value="삭제"></div>
-                    {% endif %}
+             
                
 
             </div>
