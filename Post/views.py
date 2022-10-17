@@ -16,6 +16,7 @@ def edit_post(request, id):
     post = PostModel.objects.get(id=id)
 
     if request.method == "POST":
+        post.title = request.POST['title']
         post.content = request.POST['content']
         try:
             post.image = request.FILES['image']
@@ -23,7 +24,6 @@ def edit_post(request, id):
             post.image = None
         post.save()
         return redirect('post_view/'+str(post.id),{'post':post})
-    elif request.method == "GET":
-        post = PostModel.objects.get(id=id)
-        return render(request, 'post/edit_post.html', {'post':post})
-
+    else:
+        post=PostModel()
+        return render(request, 'update.html', {'post':post})
