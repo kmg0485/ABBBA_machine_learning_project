@@ -1,19 +1,29 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import PostModel
 # Create your views here.
 
 def post_view(request, id):
-    if request.method == 'POST':
-        comment = request.POST.get("comment", "")
+    if request.method == 'GET':
         post = PostModel.objects.get(id=id)
+        return render(request, 'post/detail_post.html', {'post': post})
 
-        Posts = PostModel
-        Posts.comment = comment
-        Posts.author = request.user
-        Posts.image = image
-        Posts.save()
-    elif request.method == 'GET':
-        return render(request, 'upload_post.html' )
+def delete_post(request, id):
+    post = PostModel.objects.get(id=id)
+    post.delete()
+    return render(request,'post/main.html' )
 
-def upload_post(request):
-    pass
+def edit_post(request, id):
+    post = PostModel.objects.get(id=id)
+
+    if request.method == "POST":
+        post.content = request.POST['content']
+        try:
+            post.image = request.FILES['image']
+        except:
+            post.image = None
+        post.save()
+        return redirect('post_view/'+str(post.id),{'post':post})
+    elif request.method == "GET":
+        post = PostModel.objects.get(id=id)
+        return render(request, 'post/edit_post.html', {'post':post})
+

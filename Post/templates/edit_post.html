@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+    <!-- Facebook Meta Tags / 페이스북 오픈 그래프 -->
+    <meta property="og:url" content="http://kindtiger.dothome.co.kr/insta">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="instagram">
+    <meta property="og:description" content="instagram clone">
+    <meta property="og:image" content="http://kindtiger.dothome.co.kr/insta/imgs/instagram.jpeg">
+    .
+    <!-- Twitter Meta Tags / 트위터 -->
+    <meta name="twitter:card" content="instagram clone">
+    <meta name="twitter:title" content="instagram">
+    <meta name="twitter:description" content="instagram clone">
+    <meta name="twitter:image" content="http://kindtiger.dothome.co.kr/insta/imgs/instagram.jpeg">
+
+    <!-- Google / Search Engine Tags / 구글 검색 엔진 -->
+    <meta itemprop="name" content="instagram">
+    <meta itemprop="description" content="instagram clone">
+    <meta itemprop="image" content="http://kindtiger.dothome.co.kr/insta/imgs/instagram.jpeg">
+
+
+    <title>instagram</title>
+    <link rel="shortcut icon" href="../../imgs/instagram.png">
+    <style>       body {
+        background: #f8f8f8;
+    }
+
+  
+
+    #container {
+        background: #fafafa;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+
+    #main_container {
+        /*height: 100vh;*/
+        padding-top: 135px;
+        display: flex;
+        justify-content: center;
+        order: 1;
+    }
+
+
+    #main_container .b_inner {
+        width: 935px;
+        position: relative;
+    }
+
+
+
+
+    #main_container {
+        padding-top: 130px;
+        display: flex;
+        justify-content: center;
+    }
+
+    #main_container .inner {
+        width: 935px;
+        /*height: 500px;*/
+        /*background: red;*/
+        position: relative;
+
+    }
+
+    .contents_box {}
+
+
+    .contents {
+        max-width: 614px;
+        border: 1px solid rgba(0, 0, 0, 0.09);
+        border-radius: 3px;
+        margin-bottom: 60px;
+        background: white;
+    }
+
+
+    .contents .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+    }
+
+
+
+    .contents .top .profile_img {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-right: 10px;
+    }
+
+
+    .contents .top .profile_img img {
+        width: 100%;
+    }
+
+
+    .contents .top .user_container {
+        display: flex;
+    }
+
+    .contents .sprite_more_icon {
+        position: relative;
+    }
+
+    .contents .toggle_box {
+        text-align: center;
+        position: absolute;
+        right: 0;
+        top: 20px;
+        border: 1px solid rgba(0, 0, 0, 0.09);
+        border-radius: 3px;
+        display: none;
+    }
+
+    .contents .sprite_more_icon.on .toggle_box {
+        display: block;
+    }
+
+    .contents .toggle_box>li {
+        padding: 5px 10px;
+        background: white;
+    }
+
+    .contents .toggle_box>li input {
+        border: none;
+        font-size: inherit;
+    }
+
+    .contents .img_section {
+        overflow: hidden;
+    }
+
+    .contents .img_section img {
+        width: 100%;
+    }
+
+
+    .contents .bottom_icons {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+    }
+
+    .contents .bottom_icons .left_icons {
+        display: flex;
+    }
+
+    .contents .bottom_icons .left_icons>div {
+        margin-right: 10px;
+        cursor: pointer;
+    }
+
+    .contents .bottom_icons .right_icon>div {
+        cursor: pointer;
+    }
+
+    .sprite_heart_icon_outline.on {
+        background: url('../../imgs/background01.png') no-repeat -26px -261px;
+    }
+
+
+    .contents .likes {
+        padding: 5px 20px;
+        color: #262626;
+    }
+
+
+    .contents .comment_container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px 20px;
+    }
+
+    .contents .comment_container .comment {
+        display: flex;
+        flex-direction: column;
+        font-size: 14px;
+    }
+
+    .contents .comment_container .comment-detail {
+        display: flex;
+    }
+
+    .contents .comment_container .comment .nick_name {
+        margin-right: 10px;
+    }
+
+
+    .contents .timer {
+        font-size: 10px;
+        letter-spacing: 0.2px;
+        color: #999;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.09);
+        padding: 10px 20px;
+    }
+
+
+    .contents .comment_field {
+        min-height: 56px;
+        padding: 0 20px;
+        position: relative;
+    }
+
+
+    .contents .comment_field input {
+        width: 100%;
+        height: 56px;
+        border: none;
+        outline: none;
+        background: transparent;
+    }
+
+    .contents .comment_field input:focus~.upload_btn {
+        pointer-events: initial;
+        opacity: 1;
+    }
+
+        #main_container {
+            padding-top: 220px;
+        }
+
+
+    .post_form {
+        padding: 40px;
+        background-color: #fff;
+        border: 1px solid #e6e6e6;
+        margin: 0 0 10px;
+    }
+
+    .post_form .title {
+        margin: 0 10px 40px;
+        font-weight: 400;
+        font-size: 30px;
+        text-align: center;
+    }
+
+
+    .post_form .preview {
+        margin-bottom: 30px;
+    }
+
+    .post_form .preview .upload {
+        max-width: 300px;
+        height: 300px;
+        border: 1px solid #e6e6e6;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+
+    .plus_icon {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        margin: 0 auto 10px;
+        border: 1px solid #ffcbcb;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 50%;
+    }
+
+
+    .plus_icon span {
+        position: absolute;
+        display: block;
+        width: 2px;
+        height: 30px;
+        background: #ffcbcb
+
+    }
+
+    .plus_icon span:nth-child(2) {
+        transform: rotate(90deg);
+    }
+
+    .post_form p {
+        margin-bottom: 20px;
+    }
+
+    .post_form input[type=file] {
+        width: 100%;
+        background: 0 0;
+        border: 1px solid #efefef;
+        border-radius: 3px;
+        box-sizing: border-box;
+        color: #262626;
+        font-size: 14px;
+        padding: 7px 8px 7px;
+    }
+
+
+    .post_form textarea {
+        width: 100%;
+        background: 0 0;
+        border: 1px solid #efefef;
+        border-radius: 3px;
+        box-sizing: border-box;
+        color: #262626;
+        font-size: 14px;
+        padding: 7px 8px 7px;
+    }
+
+
+
+    .submit_btn {
+        background: #ffcbcb;
+        border-color: #000000;
+        color: black;
+        border-radius: 3px;
+        border-style: solid;
+        border-width: 1px;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 28px;
+        outline: none;
+        width: 100%;
+        padding: 0;
+        margin-top: 10px;
+        margin : 5px;
+    }
+    </style>
+</head>
+
+<body>
+
+
+    <section id="container">
+
+
+        <div id="main_container">
+            <div class="post_form_container">
+                <form action="#" method="POST" class="post_form" enctype="multipart/form-data">
+                    {% csrf_token %}<div class="title">
+                        EDIT POST
+                    </div>
+                    <div class="preview">
+                        <div class="upload">
+                            <div class="post_btn">
+                                <div class="plus_icon">
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                                <canvas id="imageCanvas"></canvas>
+                                <!--<p><img id="img_id" src="#" style="width: 300px; height: 300px; object-fit: cover" alt="thumbnail"></p>-->
+                            </div>
+                        </div>
+                    </div>
+                    <p>
+                        <input type="file" name="photo" id="id_photo" required="required">
+                    </p>
+                    <p>
+                        <textarea name="content" id="text_field" cols="50" rows="5" placeholder="140자 까지 등록 가능합니다.
+#태그명 을 통해서 검색 태그를 등록할 수 있습니다.
+예시 : I # love # insta!"></textarea>
+
+                    </p>
+                    <input class="submit_btn" type="submit" value="글 수정하기">
+                </form>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+    <script src="js/insta.js"></script>
+
+    <script>
+        var fileInput = document.querySelector("#id_photo"),
+            button = document.querySelector(".input-file-trigger"),
+            the_return = document.querySelector(".file-return");
+
+        // Show image
+        fileInput.addEventListener('change', handleImage, false);
+        var canvas = document.getElementById('imageCanvas');
+        var ctx = canvas.getContext('2d');
+
+
+        function handleImage(e) {
+            var reader = new FileReader();
+            reader.onload = function (event) {
+                var img = new Image();
+                // var imgWidth =
+                img.onload = function () {
+                    canvas.width = 300;
+                    canvas.height = 300;
+                    ctx.drawImage(img, 0, 0, 300, 300);
+                };
+                img.src = event.target.result;
+                // img.width = img.width*0.5
+                // canvas.height = img.height;
+            };
+            reader.readAsDataURL(e.target.files[0]);
+        }
+
+
+    </script>
+</body>
+
+</html>
