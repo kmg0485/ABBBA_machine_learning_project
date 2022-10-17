@@ -21,16 +21,20 @@
   </head>
 
   <body>
-        <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1" style="width: 800px">검색 결과</span>
+          <a class="navbar-brand" href="#">검색 결과:</a>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">#person</a>
+              </li>
+            </ul>
+            <form class="d-flex">
+              <button class="btn btn-outline-success" type="submit" style="color: #F93F4C; border-color: #F93F4C; ">전체 보기</button>
+            </form>
+          </div>
         </div>
-        </nav>
-        <div style="display: flex">
-          <button class="btn btn-outline-success" type="submit" style="color: #F93F4C; border-color: #F93F4C">전체 글 보기</button>
-        </div>
-      </div>
-    </nav>
+      </nav>
     <div class="row row-cols-1 row-cols-md-5 g-4">
       <div class="col">
         <div class="card">
