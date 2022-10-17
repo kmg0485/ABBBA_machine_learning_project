@@ -1,6 +1,6 @@
 # 모델링
 from django.db import models
-from user.models import UserModel
+# from user.models import UserModel
 
 # 사진
 import os
@@ -12,9 +12,9 @@ from taggit.managers import TaggableManager
 
 class PostModel(models.Model) :
     content = models.TextField()
-    author = models.ForeignKey(UserModel, on_delete=models.CASCADE)
+    # author = models.ForeignKey(UserModel, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
-    tags = TaggableManager(blank=True)
+    # tags = TaggableManager(blank=True)
     
     def upload_img(instance, filename):
         # upload_to="%Y/%m/%d" 처럼 날짜로 세분화
