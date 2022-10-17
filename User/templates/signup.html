@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta
+            name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+        <!-- Facebook Meta Tags / 페이스북 오픈 그래프 -->
+        <meta property="og:url" content="http://kindtiger.dothome.co.kr/insta">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="instagram">
+        <meta property="og:description" content="instagram clone">
+        <meta
+            property="og:image"
+            content="http://kindtiger.dothome.co.kr/insta/imgs/instagram.jpeg">
+        
+        <!-- Twitter Meta Tags / 트위터 -->
+        <meta name="twitter:card" content="instagram clone">
+        <meta name="twitter:title" content="instagram">
+        <meta name="twitter:description" content="instagram clone">
+        <meta
+            name="twitter:image"
+            content="http://kindtiger.dothome.co.kr/insta/imgs/instagram.jpeg">
+
+        <!-- Google / Search Engine Tags / 구글 검색 엔진 -->
+        <meta itemprop="name" content="instagram">
+        <meta itemprop="description" content="instagram clone">
+        <meta
+            itemprop="image"
+            content="http://kindtiger.dothome.co.kr/insta/imgs/instagram.jpeg">
+
+        <title>instagram</title>
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/common.css">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/login.css">
+        <link rel="shortcut icon" href="imgs/instagram.png">
+        <style>
+            #main_container {
+                margin-top: 200px;
+                padding-top: 130px;
+                display: flex;
+                justify-content: center;
+            }
+
+            #container {
+                background: #fafafa;
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+            }
+
+            #main_container {
+                /*height: 100vh;*/
+                padding-top: 135px;
+                display: flex;
+                justify-content: center;
+                order: 1;
+            }
+
+            .form_container {
+                width: 350px;
+                margin: 0 auto;
+            }
+
+            .form_container .form {
+                background-color: #fff;
+                border: 1px solid #e6e6e6;
+                padding: 0 40px 25px;
+                margin-bottom: 30px;
+            }
+
+            .form label {
+                display: inline-block;
+                max-width: 100%;
+                margin-bottom: 5px;
+                font-weight: 700;
+            }
+
+            .form input {
+                width: 100%;
+                background: 0 0;
+                border: 1px solid #efefef;
+                border-radius: 3px;
+                box-sizing: border-box;
+                color: #262626;
+                font-size: 14px;
+                padding: 7px 8px;
+            }
+
+            .form p {
+                margin-bottom: 10px;
+            }
+
+            .form .submit_btn {
+                background: #3897f0;
+                border-color: #3897f0;
+                color: #fff;
+                border-radius: 5px;
+                border-style: solid;
+                border-width: 1px;
+                font-size: 14px;
+                font-weight: 600;
+                line-height: 28px;
+                outline: none;
+                padding: 0;
+                width: 100%;
+                margin-top: 10px;
+                cursor: pointer;
+                margin-bottom: 25px;
+            }
+
+            .bottom_box {
+                text-align: center;
+                /*height: 290px;*/
+                background-color: #fff;
+                border: 1px solid #e6e6e6;
+                padding: 20px 30px 25px;
+                /*display: flex;*/
+                /*align-items: center;*/
+            }
+
+            .bar {
+                flex: auto;
+                border: none;
+                height: 0.5px;
+                background-color: rgb(120, 120, 120);
+            }
+
+            .title{
+            text-align: center;
+        }
+        </style>
+    </head>
+
+    <body>
+
+        <section>
+            <div id="main_container">
+
+                <div class="form_container">
+
+                    <div class="form">
+
+                        <h1 class="title">머신러닝</h1>
+
+                        <form method="POST" action="/sign_up/">
+                            {% csrf_token %}
+
+                            
+                            
+                            <p>
+                                <input
+                                   
+                                    type="text"
+                                    id="user_name"
+                                    placeholder="아이디"
+                                    name="phone_number_or_email">
+                            </p>
+                                <input type="password" placeholder="비밀번호" name="password">
+                            </p>
+                            {% if error %}
+                                <div class="alert alert-danger" role="alert" style="color:red; font-size: 13px">
+                                    {{ error }}
+                                </div>
+                            {% endif %}
+                            <input type="submit" value="가입" class="submit_btn">
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+    </body>
+
+</html>
