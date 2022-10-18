@@ -12,7 +12,7 @@ def post_view(request, pk):
         return render(request, 'detail_post.html', {'post': current_post, 'comment':current_comment})
         
 
-#아직 구현중
+
 def delete_post(request, id):
     post = PostModel.objects.get(id=id)
     post.delete()
@@ -24,7 +24,7 @@ def edit_post(request, id):
         post.content = request.POST['content']
         post.photo = request.FILES['photo']
         post.save()
-        return redirect( 'post/post_view'+str(id), {'post':post})
+        return redirect('Post:post_view', id)
     else:
         return render(request, 'edit_post.html', {'post':post})
         
