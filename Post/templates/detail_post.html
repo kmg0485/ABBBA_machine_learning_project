@@ -36,13 +36,14 @@
 
         .post_form .preview .upload {
             max-width: 300px;
-            height: 300px;
+            height:300px;
             border: 1px solid #e6e6e6;
             margin: 0 auto;
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative;
+            
         }
 
 
@@ -132,6 +133,7 @@
 
 
 
+
         <div id="main_container" class="post_form">
             <div>
 
@@ -159,13 +161,14 @@
                         <input class="comment_btn" type="submit" value="등록">
                     </p>
                 </form>
-
+              {% if post.author == user %}
                 <div class="buttons">
 
 
-                    <input class="submit_btn" type="submit" value="게시글 수정">
-                    <input class="submit_btn" type="submit" value="게시글삭제">
+                    <a href="/post/post_view/{{ post.id }}/delete"><input class="submit_btn" type="submit" value="게시글 수정"></a>
+                    <a href="/post/post_view/{{ post.id }}/edit"><input class="submit_btn" type="submit" value="게시글 삭제"></a>
                 </div>
+                {% endif %}
 
             </div>
 
