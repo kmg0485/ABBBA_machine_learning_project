@@ -5,9 +5,9 @@ from django.http import HttpResponse
 # from User.models import UserModel
 # Create your views here.
 
-def post_view(request, id):
+def post_view(request, pk):
     if request.method == 'GET':
-        post = PostModel.objects.get(id=id)
+        post = PostModel.objects.get(pk=pk)
         return render(request, 'detail_post.html', {'post': post})
 
 #아직 구현중
@@ -42,9 +42,7 @@ def upload_img(request) :
         post.photo = request.FILES['photo']
         post.save()
         post_id = post.id
-        #return redirect('post:detail_post', post_id)
-        return HttpResponse("db에 잘 저장이 됐을까?")
-        # 게시물 띄우는 로직이 아직 없어서 시험삼아 글자를 띄운건데, db에 저장되는 건 확인했습니다.
+        return redirect('Post:post_view', post_id)
         
 def search_view(request):
     if request.method == 'POST':
