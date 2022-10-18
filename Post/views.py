@@ -1,14 +1,16 @@
 
 from django.shortcuts import render, redirect
-from Post.models import PostModel
+from Post.models import PostModel, CommentModel
 from django.http import HttpResponse
 # from User.models import UserModel
 # Create your views here.
 
-def post_view(request, id):
+def post_view(request, pk):
     if request.method == 'GET':
-        post = PostModel.objects.get(id=id)
-        return render(request, 'detail_post.html', {'post': post})
+        current_post = PostModel.objects.get(pk=pk)
+        current_comment = CommentModel.objects.filter(post_id = pk).order_by('-created_at')
+        return render(request, 'detail_post.html', {'post': current_post, 'comment':current_comment})
+        
 
 #아직 구현중
 def delete_post(request, id):
@@ -33,14 +35,22 @@ def upload_img(request) :
     elif request.method == 'POST' :
         post = PostModel()
         post.content=request.POST.get('content')
-        '''post.author= request.user'''
+        post.author= request.user
         post.photo = request.FILES['photo']
         post.save()
         post_id = post.id
-        #return redirect('post:detail_post', post_id)
-        return HttpResponse("db에 잘 저장이 됐을까?")
-        # 게시물 띄우는 로직이 아직 없어서 시험삼아 글자를 띄운건데, db에 저장되는 건 확인했습니다.
-        
+        return redirect('Post:post_view', post_id)
+     
+def upload_comment(request, pk):
+    if request.method == 'POST' :
+        comment = CommentModel()
+        comment.comment = request.POST.get('comment_content')
+        comment.author = request.user
+        comment.post = PostModel.objects.get(pk=pk)
+        comment.save()
+        return redirect('Post:post_view', comment.post_id)
+    
+   
 def search_view(request):
     if request.method == 'POST':
                 searched = request.POST['search']        
