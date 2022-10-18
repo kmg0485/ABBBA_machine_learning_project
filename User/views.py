@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import UserModel
 from django.contrib.auth import authenticate, login as loginsession
 
@@ -11,7 +11,7 @@ def signup(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
         UserModel.objects.create_user(username=username, password=password)
-        return HttpResponse("회원가입 완료!")
+        return redirect("User:login")
 
 
 def login(request):
@@ -23,6 +23,6 @@ def login(request):
         user = authenticate(request, username=username, password=password)
         if user :
             loginsession(request, user)
-            return HttpResponse(f"추후 메인페이지로 이동하는데, 현재 로그인한 친구는 {request.user}")
-        else :
-            return HttpResponse("추후 회원가입 페이지로 이동")
+            return redirect('Post:search')
+        else : 
+            return redirect('User:signup')
