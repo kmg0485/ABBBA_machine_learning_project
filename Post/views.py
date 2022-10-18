@@ -45,4 +45,13 @@ def upload_img(request) :
         #return redirect('post:detail_post', post_id)
         return HttpResponse("db에 잘 저장이 됐을까?")
         # 게시물 띄우는 로직이 아직 없어서 시험삼아 글자를 띄운건데, db에 저장되는 건 확인했습니다.
+        
+def search_view(request):
+    if request.method == 'POST':
+                searched = request.POST['search']        
+                photos = PostModel.objects.filter(name__contains=searched)
+                return render(request, 'result.html', {'searched': searched, 'photos': photos})
+    else:
+            return render(request, 'result.html', {})
+    
 
