@@ -8,9 +8,10 @@ from django.http import HttpResponse
 def post_view(request, id):
     if request.method == 'GET':
         post = PostModel.objects.get(id=id)
-        return render(request, 'post/detail_post.html', {'post': post})
+        return render(request, 'detail_post.html', {'post': post})
 
-def delete_post(request, id):
+#아직 구현중
+'''def delete_post(request, id):
     post = PostModel.objects.get(id=id)
     post.delete()
     return render(request,'post/main.html' )
@@ -28,8 +29,7 @@ def edit_post(request, id):
         post.save()
         return redirect('post_view/'+str(post.id),{'post':post})
     else:
-        post=PostModel()
-        return render(request, 'update.html', {'post':post})
+        return render(request, 'post/detail_post.html', {'post':post})'''
         
         
 def upload_img(request) :
@@ -38,11 +38,11 @@ def upload_img(request) :
     elif request.method == 'POST' :
         post = PostModel()
         post.content=request.POST.get('content')
-        post.author= request.user
+        '''post.author= request.user'''
         post.photo = request.FILES['photo']
         post.save()
         post_id = post.id
-        # return redirect('post:detail_post', post_id)
+        #return redirect('post:detail_post', post_id)
         return HttpResponse("db에 잘 저장이 됐을까?")
         # 게시물 띄우는 로직이 아직 없어서 시험삼아 글자를 띄운건데, db에 저장되는 건 확인했습니다.
         
