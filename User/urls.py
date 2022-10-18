@@ -1,4 +1,5 @@
 from django.urls import path, include
+from django.shortcuts import render, redirect
 from User import views
 
 app_name = "User"
