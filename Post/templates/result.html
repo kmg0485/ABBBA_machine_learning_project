@@ -43,13 +43,12 @@
 ​
     <form class="d-flex" method="GET" action="{% url 'Post:search' %}">
       <div class="row row-cols-1 row-cols-md-5 g-4">
+        {% for photo in photos %}
         <div class="col">
-         {% for photo in photos %}
           <div class="card">
             <img class="card-img-top" alt="..." src="{{ photo.photo.url }}"/>
           </div>
-          {% endfor %}
-        </div>
+        </div>{% endfor %}
       </div>
     </form>
       
