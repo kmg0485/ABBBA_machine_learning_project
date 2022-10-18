@@ -358,6 +358,7 @@
                                     <span></span>
                                     <span></span>
                                 </div>
+                                <img style=" display:flex; width:100%;  " src="{{post.photo.url}}"/>
                                 <canvas id="imageCanvas"></canvas>
                                 <!--<p><img id="img_id" src="#" style="width: 300px; height: 300px; object-fit: cover" alt="thumbnail"></p>-->
                             </div>
@@ -367,12 +368,11 @@
                         <input type="file" name="photo" id="id_photo" required="required">
                     </p>
                     <p>
-                        <textarea name="content" id="text_field" cols="50" rows="5" placeholder="140자 까지 등록 가능합니다.
-#태그명 을 통해서 검색 태그를 등록할 수 있습니다.
-예시 : I # love # insta!"></textarea>
-
+                        <textarea name="content" id="text_field" cols="50" rows="5" placeholder="140자 까지 등록 가능합니다.">{{post.content}}</textarea>
+                    
                     </p>
                     <input class="submit_btn" type="submit" value="글 수정하기">
+                    
                 </form>
 
             </div>
@@ -382,7 +382,6 @@
 
     </section>
 
-    <script src="js/insta.js"></script>
 
 </body>
 
