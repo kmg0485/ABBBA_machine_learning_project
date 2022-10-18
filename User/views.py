@@ -5,11 +5,18 @@ from django.contrib.auth import authenticate, login as loginsession
 
 # Create your views here.
 def signup(request):
-    return render(request, "signup.html")
+    if request.method == "GET":
+        return render(request, 'signup.html')
+    elif request.method =="POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        UserModel.objects.create_user(username=username, password=password)
+        return HttpResponse("회원가입 완료!")
+
 
 def login(request):
     if request.method == 'GET' :
-        return render(request, 'signin.html')
+        return render(request, 'signin.html') # url 주소가 아닌, html 파일이여서, 수정할 필요 없습니다.
     elif request.method == 'POST' :
         username = request.POST.get('username')
         password = request.POST.get('password')

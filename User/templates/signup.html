@@ -31,7 +31,7 @@
             itemprop="image"
             content="http://kindtiger.dothome.co.kr/insta/imgs/instagram.jpeg">
 
-        <title>instagram</title>
+        <title>머신러닝 회원가입 페이지</title>
         <link rel="stylesheet" href="css/reset.css">
         <link rel="stylesheet" href="css/common.css">
         <link rel="stylesheet" href="css/style.css">
@@ -144,27 +144,31 @@
 
                     <div class="form">
 
-                        <h1 class="title">머신러닝</h1>
+                        <h1 class="title">머신러닝 회원가입 페이지</h1>
 
                         <form action="{% url 'User:signup' %}" method="POST">
                             {% csrf_token %}
       
                             <p>
                                 <input
-                                   
                                     type="text"
-                                    id="user_name"
+                                    name="username"
                                     placeholder="아이디"
-                                    name="phone_number_or_email">
+                                    id="username"
+                                    class="username"
+                                    />
                             </p>
-                                <input type="password" placeholder="비밀번호" name="password">
+
+                            <p>
+                                <input type="password" placeholder="비밀번호" name="password" />
                             </p>
+
                             {% if error %}
                                 <div class="alert alert-danger" role="alert" style="color:red; font-size: 13px">
                                     {{ error }}
                                 </div>
                             {% endif %}
-                            <input type="submit" value="가입" class="submit_btn">
+                            <input type="submit" value="회원가입" class="submit_btn" />
                         </form>
 
                     </div>
