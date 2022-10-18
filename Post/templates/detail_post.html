@@ -36,14 +36,14 @@
 
         .post_form .preview .upload {
             max-width: 300px;
-            height:300px;
+            height: 300px;
             border: 1px solid #e6e6e6;
             margin: 0 auto;
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative;
-            
+
         }
 
 
@@ -95,6 +95,7 @@
 
         .buttons {
             display: flex;
+            justify-content: space-around;
         }
 
         #comment_box {
@@ -115,6 +116,7 @@
             line-height: 28px;
             outline: none;
             width: 15%;
+            height: 20%;
             padding: 0;
             margin-top: 10px;
             margin: 5px;
@@ -122,6 +124,7 @@
 
         .comment_box {
             display: flex;
+            justify-content: space-between;
         }
     </style>
 </head>
@@ -137,8 +140,10 @@
         <div id="main_container" class="post_form">
             <div>
 
+
                 {% csrf_token %}<div class="title">
                     POST DETAIL
+
                 </div>
                 <div class="preview">
                     <img style=" display:flex; width:100%; max-width:400px; max-height:400px; margin:auto  " src="{{post.photo.url}}" />
@@ -147,11 +152,13 @@
                 <div style="border-bottom= solid 2px gray;">{{post.content}}</div>
               
                 {% for cm in comment %}
-                
-                <div class="comment_box">
+                <form action="{% url 'Post:delete_comment' cm.id %}" method="POST">
+                    {% csrf_token %}
+                <div class="comment_box"><div style="display: flex;">
                     <p>{{ cm.author.username }} :</p>
-                    <p> {{ cm.comment }}</p>
-                </div>
+                    <p> {{ cm.comment }}</p></div>
+                    <input class="comment_btn" type="submit" value="삭제">
+                </div></form>
                 {% endfor %}
                 </p>
                 <form action="{% url 'Post:upload_comment' post.id %}" method="POST">
@@ -161,12 +168,14 @@
                         <input class="comment_btn" type="submit" value="등록">
                     </p>
                 </form>
-              {% if post.author == user %}
+                {% if post.author == user %}
                 <div class="buttons">
+
 
 
                     <a href="{% url 'Post:edit-post' post.id %}"  ><input class="submit_btn" type="submit" value="게시글 수정"></a>
                     <a href="{% url 'Post:delete-post' post.id %}"><input class="submit_btn" type="submit" value="게시글 삭제"></a>
+
                 </div>
                 {% endif %}
 
