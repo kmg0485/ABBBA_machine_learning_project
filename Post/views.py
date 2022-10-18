@@ -11,25 +11,20 @@ def post_view(request, id):
         return render(request, 'detail_post.html', {'post': post})
 
 #아직 구현중
-'''def delete_post(request, id):
+def delete_post(request, id):
     post = PostModel.objects.get(id=id)
     post.delete()
-    return render(request,'post/main.html' )
+    return render(request,'main.html' )
 
 def edit_post(request, id):
     post = PostModel.objects.get(id=id)
-
     if request.method == "POST":
-        post.title = request.POST['title']
         post.content = request.POST['content']
-        try:
-            post.image = request.FILES['image']
-        except:
-            post.image = None
+        post.photo = request.FILES['photo']
         post.save()
-        return redirect('post_view/'+str(post.id),{'post':post})
+        return redirect( 'post/post_view'+str(id), {'post':post})
     else:
-        return render(request, 'post/detail_post.html', {'post':post})'''
+        return render(request, 'edit_post.html', {'post':post})
         
         
 def upload_img(request) :
