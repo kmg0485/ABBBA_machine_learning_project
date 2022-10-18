@@ -59,10 +59,13 @@ def delete_comment(request, pk):
    
 def search_view(request):
     if request.method == 'POST':
-                searched = request.POST['search']        
-                photos = PostModel.objects.filter(name__contains=searched)
-                return render(request, 'result.html', {'searched': searched, 'photos': photos})
+        searched = request.POST['search']        
+        photos = PostModel.objects.filter(content__contains=searched)
+        return render(request, 'result.html', {'searched': searched, 'photos': photos})
     else:
-            return render(request, 'result.html', {})
+        return render(request, 'result.html', {})
     
-
+    
+def main_view(request) :
+    feeds = PostModel.objects.all()
+    return render(request,'main.html',{'feeds':feeds})
