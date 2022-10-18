@@ -8,15 +8,8 @@ from django.http import HttpResponse
 def post_view(request, pk):
     if request.method == 'GET':
         current_post = PostModel.objects.get(pk=pk)
-        current_comment = CommentModel.objects.get(post_pk = pk).order_by('-created_at')
+        current_comment = CommentModel.objects.filter(post_id = pk).order_by('-created_at')
         return render(request, 'detail_post.html', {'post': current_post, 'comment':current_comment})
-    elif request.method == 'POST' :
-        comment = CommentModel()
-        comment.comment = request.POST.get('comment_content')
-        comment.post = PostModel.objects.get(pk=pk)
-        comment.save()
-        post_id = comment.post.pk
-        return redirect('Post:post_view', post_id)
         
 
 #아직 구현중
@@ -52,7 +45,17 @@ def upload_img(request) :
         post.save()
         post_id = post.id
         return redirect('Post:post_view', post_id)
-        
+     
+def upload_comment(request, pk):
+    if request.method == 'POST' :
+        comment = CommentModel()
+        comment.comment = request.POST.get('comment_content')
+        comment.author = request.user
+        comment.post = PostModel.objects.get(pk=pk)
+        comment.save()
+        return redirect('Post:post_view', comment.post_id)
+    
+   
 def search_view(request):
     if request.method == 'POST':
                 searched = request.POST['search']        
