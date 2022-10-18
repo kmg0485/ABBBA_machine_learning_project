@@ -139,15 +139,18 @@
 
         <div id="main_container" class="post_form">
             <div>
-                <div class="title">
-                    DETAIL
+
+
+                {% csrf_token %}<div class="title">
+                    POST DETAIL
+
                 </div>
                 <div class="preview">
-
-                    <img style=" display:flex; width:100%;  " src="{{post.photo.url}}" />
+                    <img style=" display:flex; width:100%; max-width:400px; max-height:400px; margin:auto  " src="{{post.photo.url}}" />
                 </div>
-                <p>
-                <div>{{post.content}}</div>
+              
+                <div style="border-bottom= solid 2px gray;">{{post.content}}</div>
+              
                 {% for cm in comment %}
                 <form action="{% url 'Post:delete_comment' cm.id %}" method="POST">
                     {% csrf_token %}
@@ -169,10 +172,10 @@
                 <div class="buttons">
 
 
-                    <a href="{% url 'Post:edit-post' post.id %}"><input class="submit_btn" type="submit"
-                            value="게시글 수정"></a>
-                    <a href="{% url 'Post:delete-post' post.id %}"><input class="submit_btn" type="submit"
-                            value="게시글 삭제"></a>
+
+                    <a href="{% url 'Post:edit-post' post.id %}"  ><input class="submit_btn" type="submit" value="게시글 수정"></a>
+                    <a href="{% url 'Post:delete-post' post.id %}"><input class="submit_btn" type="submit" value="게시글 삭제"></a>
+
                 </div>
                 {% endif %}
 
