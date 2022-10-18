@@ -1,14 +1,23 @@
 
 from django.shortcuts import render, redirect
-from Post.models import PostModel
+from Post.models import PostModel, CommentModel
 from django.http import HttpResponse
 # from User.models import UserModel
 # Create your views here.
 
 def post_view(request, pk):
     if request.method == 'GET':
-        post = PostModel.objects.get(pk=pk)
-        return render(request, 'detail_post.html', {'post': post})
+        current_post = PostModel.objects.get(pk=pk)
+        current_comment = CommentModel.objects.get(post_pk = pk).order_by('-created_at')
+        return render(request, 'detail_post.html', {'post': current_post, 'comment':current_comment})
+    elif request.method == 'POST' :
+        comment = CommentModel()
+        comment.comment = request.POST.get('comment_content')
+        comment.post = PostModel.objects.get(pk=pk)
+        comment.save()
+        post_id = comment.post.pk
+        return redirect('Post:post_view', post_id)
+        
 
 #아직 구현중
 '''def delete_post(request, id):
@@ -38,7 +47,7 @@ def upload_img(request) :
     elif request.method == 'POST' :
         post = PostModel()
         post.content=request.POST.get('content')
-        '''post.author= request.user'''
+        post.author= request.user
         post.photo = request.FILES['photo']
         post.save()
         post_id = post.id
