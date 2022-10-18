@@ -95,12 +95,14 @@
         .buttons {
             display: flex;
         }
-        #comment_box{
+
+        #comment_box {
             display: flex;
-            width:100%;
+            width: 100%;
             justify-content: space-evenly;
         }
-        .comment_btn{
+
+        .comment_btn {
             background: #ffcbcb;
             border-color: #000000;
             color: black;
@@ -116,7 +118,8 @@
             margin-top: 10px;
             margin: 5px;
         }
-        .comment_box{
+
+        .comment_box {
             display: flex;
         }
     </style>
@@ -141,21 +144,25 @@
                 </div>
                 <p>
                 <div>{{post.content}}</div>
-                {% for comment in current_comment %}
+                {% for cm in comment %}
+                
                 <div class="comment_box">
-                    <h6>{{ comment.suthor.username }} :</h6><p> {{ comment.comment }}</p>
+                    <p>{{ cm.author.username }} :</p>
+                    <p> {{ cm.comment }}</p>
                 </div>
                 {% endfor %}
                 </p>
-                <form action="{% url 'Post:post_view' %}" method="POST">
+                <form action="{% url 'Post:upload_comment' post.id %}" method="POST">
+                    {% csrf_token %}
                     <p id="comment_box">
                         <input style="width:80%;" name="comment_content" type="txt" placeholder="코멘트 입력창">
                         <input class="comment_btn" type="submit" value="등록">
-                    </p></form>
-                
+                    </p>
+                </form>
+
                 <div class="buttons">
-                    
-                
+
+
                     <input class="submit_btn" type="submit" value="게시글 수정">
                     <input class="submit_btn" type="submit" value="게시글삭제">
                 </div>
