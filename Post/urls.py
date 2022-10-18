@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from . import machine
 
 
 app_name = 'Post'
@@ -15,4 +16,5 @@ urlpatterns = [
     path("post_view/delete_cmt/<int:pk>",views.delete_comment, name="delete_comment"),
     path("search/", views.search_view, name="search"),
     path('main/', views.main_view, name='main'),
+    path('machine/<int:pk>', machine.machine, name='machine'),
     ]
