@@ -257,13 +257,14 @@
 
         .post_form .preview .upload {
             max-width: 300px;
-            height: 300px;
+            height:300px;
             border: 1px solid #e6e6e6;
             margin: 0 auto;
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative;
+            
         }
 
       
@@ -332,19 +333,20 @@
                     {% csrf_token %}<div class="title">
                         상세 글
                     </div>
-                    <div class="preview">
-                        
+                    <div class="preview">   
                         <img style=" display:flex; width:100%;  " src="{{post.photo.url}}"/>
                     </div>
                     <p>
                         <div>{{post.content}}</div>
 
                 </form>
+                <a href="/post/post_view/{{ post.id }}/delete"><input class="submit_btn" type="submit" value="삭제"></a></div>
+                 </p><div class="buttons">
+                        <a href="/post/post_view/{{ post.id }}/edit"><input class="submit_btn" type="submit" value="수정"></a>
+                {% if post.author == user %}
+                   
                     
-                    </p><div class="buttons">
-                    <input class="submit_btn" type="submit" value="수정">
-                    <input class="submit_btn" type="submit" value="삭제"></div>
-             
+                {% endif %}
                
 
             </div>
@@ -354,38 +356,9 @@
 
     </section>
 
-    <script src="js/insta.js"></script>
+  
 
-    <script>
-        var fileInput = document.querySelector("#id_photo"),
-            button = document.querySelector(".input-file-trigger"),
-            the_return = document.querySelector(".file-return");
-
-        // Show image
-        fileInput.addEventListener('change', handleImage, false);
-        var canvas = document.getElementById('imageCanvas');
-        var ctx = canvas.getContext('2d');
-
-
-        function handleImage(e) {
-            var reader = new FileReader();
-            reader.onload = function (event) {
-                var img = new Image();
-                // var imgWidth =
-                img.onload = function () {
-                    canvas.width = 300;
-                    canvas.height = 300;
-                    ctx.drawImage(img, 0, 0, 300, 300);
-                };
-                img.src = event.target.result;
-                // img.width = img.width*0.5
-                // canvas.height = img.height;
-            };
-            reader.readAsDataURL(e.target.files[0]);
-        }
-
-
-    </script>
+    
 </body>
 
 </html>
