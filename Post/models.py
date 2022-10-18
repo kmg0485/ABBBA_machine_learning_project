@@ -38,3 +38,4 @@ class PostModel(models.Model) :
         return str(F'{self.author.username}의 글 내용 : {self.content}')'''
     # 추후 해시태그 필드 추가
 # Create your models here.
+
