@@ -25,4 +25,4 @@ def login(request):
             loginsession(request, user)
             return redirect('Post:search')
         else : 
-            return redirect('User:signup')
+            return redirect('User:signup') # 로그인 기능 완성
