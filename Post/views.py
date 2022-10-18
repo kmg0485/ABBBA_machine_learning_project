@@ -16,7 +16,7 @@ def post_view(request, pk):
 def delete_post(request, id):
     post = PostModel.objects.get(id=id)
     post.delete()
-    return render(request,'main.html' )
+    return redirect('Post:search')
 
 def edit_post(request, id):
     post = PostModel.objects.get(id=id)
@@ -50,6 +50,12 @@ def upload_comment(request, pk):
         comment.save()
         return redirect('Post:post_view', comment.post_id)
     
+def delete_comment(request, pk):
+    if request.method == 'POST' :
+        comment = CommentModel.objects.get(pk=pk)
+        post_id = comment.post_id
+        comment.delete()
+        return redirect('Post:post_view', post_id)
    
 def search_view(request):
     if request.method == 'POST':
