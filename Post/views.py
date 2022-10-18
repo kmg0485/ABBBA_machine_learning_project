@@ -67,5 +67,9 @@ def search_view(request):
     
     
 def main_view(request) :
-    feeds = PostModel.objects.all()
-    return render(request,'main.html',{'feeds':feeds})
+    
+    if request.method  == "GET":
+        
+        feeds = PostModel.objects.all().order_by('created_at')
+        return render(request,'main.html',{'feeds':feeds})
+
