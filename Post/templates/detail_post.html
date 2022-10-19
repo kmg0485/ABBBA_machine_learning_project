@@ -171,6 +171,19 @@
                         <input class="comment_btn" type="submit" value="등록">
                     </p>
                 </form>
+                좋아요 수 :{{ post.like_count }}
+                <div>
+                <form action="{% url 'Post:likes' post.id %}" method='POST'>
+                    
+                    {% csrf_token %}
+                    {% if post in user.like_posts.all %}
+                      <input type="submit" value='좋아요 취소'>
+                    {% else %}
+                      <input type="submit" value='좋아요'>
+                    {% endif %}
+                  </form>
+
+                </div>
                 {% if post.author == user %}
                 <div class="buttons">
 
