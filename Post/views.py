@@ -70,6 +70,6 @@ def main_view(request) :
     
     if request.method  == "GET":
         
-        feeds = PostModel.objects.all().order_by('created_at')
+        feeds = PostModel.objects.all().order_by('-created_at')
         return render(request,'main.html',{'feeds':feeds})
 
