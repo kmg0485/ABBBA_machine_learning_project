@@ -136,32 +136,51 @@
 
 
 
- 
+
         <div id="main_container" class="post_form">
-              <a href="{% url 'Post:main' %}"> 
-                <button  class="btn btn-outline-success" type="submit" style="color: black; border-color: #FBCBCB; ">home</button>
-               </a> 
+            <a href="{% url 'Post:main' %}">
+                <button class="btn btn-outline-success" type="submit"
+                    style="color: black; border-color: #FBCBCB; ">home</button>
+            </a>
             <div>
 
 
                 {% csrf_token %}<div class="title">
-                    
+
 
                 </div>
                 <div class="preview">
-                    <img style=" display:flex; width:100%; max-width:400px; max-height:400px; margin:auto  " src="{{post.photo.url}}" />
+                    <img style=" display:flex; width:100%; max-width:400px; max-height:400px; margin:auto  "
+                        src="{{post.photo.url}}" />
                 </div>
-              
-                <div style="border-bottom= solid 2px gray;">{{post.content}}</div>
-              
+
+                <div style="border-bottom= solid 2px gray;">
+                    <p>{{post.content}}</p>
+
+                    <div style="display: flex;">
+                    {% if tags %}
+                        <p>태그 : </p>
+                        {% for tag in tags %}
+                        <p style="border : solid 1px #ff6c6c; border-radius: 10px;">&nbsp{{ tag }}&nbsp</p>
+                        {% endfor %}
+                        {% else %}
+                        <p>자동 인식된 태그가 없습니다.</p>
+                        {% endif %}
+                    </div>
+
+                </div>
+
                 {% for cm in comment %}
                 <form action="{% url 'Post:delete_comment' cm.id %}" method="POST">
                     {% csrf_token %}
-                <div class="comment_box"><div style="display: flex;">
-                    <p>{{ cm.author.username }} :</p>
-                    <p> {{ cm.comment }}</p></div>
-                    <input class="comment_btn" type="submit" value="삭제">
-                </div></form>
+                    <div class="comment_box">
+                        <div style="display: flex;">
+                            <p>{{ cm.author.username }} :</p>
+                            <p> {{ cm.comment }}</p>
+                        </div>
+                        <input class="comment_btn" type="submit" value="삭제">
+                    </div>
+                </form>
                 {% endfor %}
                 </p>
                 <form action="{% url 'Post:upload_comment' post.id %}" method="POST">
@@ -189,8 +208,10 @@
 
 
 
-                    <a href="{% url 'Post:edit-post' post.id %}"  ><input class="submit_btn" type="submit" value="게시글 수정"></a>
-                    <a href="{% url 'Post:delete-post' post.id %}"><input class="submit_btn" type="submit" value="게시글 삭제"></a>
+                    <a href="{% url 'Post:edit-post' post.id %}"><input class="submit_btn" type="submit"
+                            value="게시글 수정"></a>
+                    <a href="{% url 'Post:delete-post' post.id %}"><input class="submit_btn" type="submit"
+                            value="게시글 삭제"></a>
 
                 </div>
                 {% endif %}
