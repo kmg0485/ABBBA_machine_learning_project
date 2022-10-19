@@ -18,7 +18,7 @@
   <body>
     <nav class="navbar navbar-light bg-light">
       <div class="container-fluid">
-        <form class="d-flex" method="POST" action="{% url 'Post:search' %}">
+        <form class="d-flex" method="GET" action="{% url 'Post:search' %}">
           {% csrf_token %}
           <input class="form-control me-2" type="search" placeholder="Search" name="search" aria-label="Search" style="width: 800px" />
           <button class="btn btn-outline-success" type="submit">검색</button>
@@ -43,7 +43,7 @@
 
       {% if posts.has_previous %}
       <a href="?page=1">맨 앞으로</a>
-      <a href="?page={{ posts.previous_page_number }}"></a>
+      <a href="?page={{ posts.previous_page_number }}">이전 페이지로</a>
       {% endif %}
       <span>{{ posts.number }}</span>
       <span>/</span>
