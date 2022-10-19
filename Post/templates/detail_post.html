@@ -158,11 +158,14 @@
                     <p>{{post.content}}</p>
 
                     <div style="display: flex;">
-
+                    {% if tags %}
                         <p>태그 : </p>
                         {% for tag in tags %}
                         <p style="border : solid 1px #ff6c6c; border-radius: 10px;">&nbsp{{ tag }}&nbsp</p>
                         {% endfor %}
+                        {% else %}
+                        <p>자동 인식된 태그가 없습니다.</p>
+                        {% endif %}
                     </div>
 
                 </div>
