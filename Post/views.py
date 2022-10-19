@@ -84,17 +84,21 @@ def main_view(request) :
         return render(request,'main.html',{'feeds':feeds, 'posts':posts})
 
 def likes(request, id):
-    post = get_object_or_404(PostModel, id=id)
-    user = request.user  
-    check_like_post = user.like_posts.filter(id=id)
+    user = request.user.is_authenticated
+    if user:
+        post = get_object_or_404(PostModel, id=id)
+        user = request.user  
+        check_like_post = user.like_posts.filter(id=id)
 
-    if check_like_post.exists():
-        user.like_posts.remove(post)
-        post.like_count -= 1
-        post.save()
-        return redirect('Post:post_view',id)
+        if check_like_post.exists():
+            user.like_posts.remove(post)
+            post.like_count -= 1
+            post.save()
+            return redirect('Post:post_view',id)
+        else:
+            user.like_posts.add(post)
+            post.like_count += 1
+            post.save()
+            return redirect('Post:post_view',id)
     else:
-        user.like_posts.add(post)
-        post.like_count += 1
-        post.save()
-        return redirect('Post:post_view',id)
+            return redirect('user:login')
