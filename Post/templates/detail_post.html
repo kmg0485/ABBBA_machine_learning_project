@@ -154,7 +154,7 @@
                         src="{{post.photo.url}}" />
                 </div>
 
-                <div style="border-bottom= solid 2px gray;">
+                <div style="border-bottom : solid 2px gray;">
                     <p>{{post.content}}</p>
 
                     <div style="display: flex;">
@@ -183,6 +183,18 @@
                 </form>
                 {% endfor %}
                 </p>
+                좋아요 수 : {{ post.like_count }}
+                <p></p>
+                <div>
+              <form action="{% url 'Post:likes' post.id %}" method='POST'>
+                {% csrf_token %}
+                {% if post in user.like_posts.all %}
+                  <input type="submit" value='❤'>
+                {% else %}
+                  <input type="submit" value='🤍'>
+                {% endif %}
+                </div>
+              </form>
                 <form action="{% url 'Post:upload_comment' post.id %}" method="POST">
                     {% csrf_token %}
                     <p id="comment_box">
@@ -190,15 +202,19 @@
                         <input class="comment_btn" type="submit" value="등록">
                     </p>
                 </form>
+               
+                <div>
+               
+                    
+                   
+
+                </div>
                 {% if post.author == user %}
                 <div class="buttons">
 
+                    <a href="{% url 'Post:edit-post' post.id %}"><input class="submit_btn" type="submit" value="게시글 수정"></a>
+                    <a href="{% url 'Post:delete-post' post.id %}"><input class="submit_btn" type="submit" value="게시글 삭제"></a>
 
-
-                    <a href="{% url 'Post:edit-post' post.id %}"><input class="submit_btn" type="submit"
-                            value="게시글 수정"></a>
-                    <a href="{% url 'Post:delete-post' post.id %}"><input class="submit_btn" type="submit"
-                            value="게시글 삭제"></a>
 
                 </div>
                 {% endif %}

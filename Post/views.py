@@ -1,10 +1,12 @@
-
-from django.shortcuts import render, redirect
-from Post.models import PostModel, CommentModel
+from django.shortcuts import render, redirect,get_object_or_404
+from User.models import UserModel
+from .models import PostModel, CommentModel
 from django.http import HttpResponse
 import simplejson as json
 # from User.models import UserModel
-# Create your views here.
+
+# pagination
+from django.core.paginator import Paginator
 
 def post_view(request, pk):
     if request.method == 'GET':
@@ -61,18 +63,42 @@ def delete_comment(request, pk):
         return redirect('Post:post_view', post_id)
    
 def search_view(request):
-    if request.method == 'POST':
-        searched = request.POST['search']        
+    if request.method == 'GET':
+        searched = request.GET.get('search') 
         photos = PostModel.objects.filter(tags__contains=searched)
-        return render(request, 'result.html', {'searched': searched, 'photos': photos})
-    else:
-        return render(request, 'result.html', {})
+        
+        paginator = Paginator(photos, 5) # 한 페이지에 게시글 15개
+        page = request.GET.get('page') # page에 해당하는 value 받아오기
+        posts = paginator.get_page(page) # 받아온 value에 해당하는 페이지 반환
+        
+        return render(request, 'result.html', {'searched': searched, 'photos': photos, 'posts' : posts})
     
     
 def main_view(request) :
     
     if request.method  == "GET":
-        
         feeds = PostModel.objects.all().order_by('-created_at')
-        return render(request,'main.html',{'feeds':feeds})
+        paginator = Paginator(feeds, 5) # 한 페이지에 게시글 15개
+        page = request.GET.get('page') # page에 해당하는 value 받아오기
+        posts = paginator.get_page(page) # 받아온 value에 해당하는 페이지 반환
+        return render(request,'main.html',{'feeds':feeds, 'posts':posts})
 
+def likes(request, id):
+    user = request.user.is_authenticated
+    if user:
+        post = get_object_or_404(PostModel, id=id)
+        user = request.user  
+        check_like_post = user.like_posts.filter(id=id)
+
+        if check_like_post.exists():
+            user.like_posts.remove(post)
+            post.like_count -= 1
+            post.save()
+            return redirect('Post:post_view',id)
+        else:
+            user.like_posts.add(post)
+            post.like_count += 1
+            post.save()
+            return redirect('Post:post_view',id)
+    else:
+            return redirect('user:login')
