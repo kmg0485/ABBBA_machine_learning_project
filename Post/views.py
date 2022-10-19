@@ -62,7 +62,7 @@ def delete_comment(request, pk):
 def search_view(request):
     if request.method == 'POST':
         searched = request.POST['search']        
-        photos = PostModel.objects.filter(content__contains=searched)
+        photos = PostModel.objects.filter(tags__contains=searched)
         return render(request, 'result.html', {'searched': searched, 'photos': photos})
     else:
         return render(request, 'result.html', {})
