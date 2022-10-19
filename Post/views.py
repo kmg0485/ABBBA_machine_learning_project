@@ -1,9 +1,12 @@
-
 from django.shortcuts import render, redirect
 from Post.models import PostModel, CommentModel
-from django.http import HttpResponse
+#from django.http import HttpResponse
+from django.contrib.auth import authenticate, login as loginsession, logout
+from django.urls import path
+
 # from User.models import UserModel
 # Create your views here.
+
 
 def post_view(request, pk):
     if request.method == 'GET':
@@ -17,6 +20,7 @@ def delete_post(request, id):
     post = PostModel.objects.get(id=id)
     post.delete()
     return render(request,'main.html' )
+
 
 def edit_post(request, id):
     post = PostModel.objects.get(id=id)
@@ -41,6 +45,7 @@ def upload_img(request) :
         post_id = post.id
         return redirect('Post:post_view', post_id)
      
+     
 def upload_comment(request, pk):
     if request.method == 'POST' :
         comment = CommentModel()
@@ -59,4 +64,9 @@ def search_view(request):
     else:
             return render(request, 'result.html', {})
     
-
+    
+def main(request):
+    if request.method == 'GET' :
+        return render(request, 'main.html')
+    
+    
