@@ -18,7 +18,7 @@
   <body>
     <nav class="navbar navbar-light bg-light">
       <div class="container-fluid">
-        <form class="d-flex" method="POST" action="{% url 'Post:search' %}">
+        <form class="d-flex" method="GET" action="{% url 'Post:search' %}">
           {% csrf_token %}
           <input class="form-control me-2" type="search" placeholder="Search" name="search" aria-label="Search" style="width: 800px" />
           <button class="btn btn-outline-success" type="submit">검색</button>
@@ -31,13 +31,27 @@
     </nav>
 
     <div class="row row-cols-1 row-cols-md-5 g-4">
-      {% for feed in feeds %}
+      {% for feed in posts %}
       <div class="col">
-        <div class="card">
-          <img src="{{ feed.photo.url }}" class="card-img-top" alt="..." />
+        <div class="card" style="border: white">
+          <a href="{% url 'Post:post_view' feed.id %}">
+            <img src="{{ feed.photo.url }}" class="card-img-top" alt="..." style="width: 350px; height: 300px" />
+          </a>
         </div>
       </div>
       {% endfor %}
+
+      {% if posts.has_previous %}
+      <a href="?page=1">맨 앞으로</a>
+      <a href="?page={{ posts.previous_page_number }}">이전 페이지로</a>
+      {% endif %}
+      <span>{{ posts.number }}</span>
+      <span>/</span>
+      <span>{{ posts.paginator.num_pages }}</span>
+      {% if posts.has_next %}
+      <a href="?page={{posts.next_page_number}}">다음으로</a>
+      <a href="?page={{posts.paginator.num_pages}}">맨 뒤로</a>
+      {% endif %}
     </div>
   </body>
 </html>
