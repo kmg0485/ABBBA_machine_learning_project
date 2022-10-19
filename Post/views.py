@@ -4,7 +4,9 @@ from Post.models import PostModel, CommentModel
 from django.http import HttpResponse
 import simplejson as json
 # from User.models import UserModel
-# Create your views here.
+
+# pagination
+from django.core.paginator import Paginator
 
 def post_view(request, pk):
     if request.method == 'GET':
@@ -65,14 +67,14 @@ def search_view(request):
         searched = request.POST['search']        
         photos = PostModel.objects.filter(tags__contains=searched)
         return render(request, 'result.html', {'searched': searched, 'photos': photos})
-    else:
-        return render(request, 'result.html', {})
     
     
 def main_view(request) :
     
     if request.method  == "GET":
-        
         feeds = PostModel.objects.all().order_by('-created_at')
-        return render(request,'main.html',{'feeds':feeds})
+        paginator = Paginator(feeds, 15) # 한 페이지에 게시글 15개
+        page = request.GET.get('page') # page에 해당하는 value 받아오기
+        posts = paginator.get_page(page) # 받아온 value에 해당하는 페이지 반환
+        return render(request,'main.html',{'feeds':feeds, 'posts':posts})
 
