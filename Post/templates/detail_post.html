@@ -136,13 +136,16 @@
 
 
 
-
+ 
         <div id="main_container" class="post_form">
+              <a href="{% url 'Post:main' %}"> 
+                <button  class="btn btn-outline-success" type="submit" style="color: black; border-color: #FBCBCB; ">home</button>
+               </a> 
             <div>
 
 
                 {% csrf_token %}<div class="title">
-                    POST DETAIL
+                    
 
                 </div>
                 <div class="preview">
