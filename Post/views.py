@@ -3,6 +3,7 @@ from Post.models import PostModel, CommentModel
 #from django.http import HttpResponse
 from django.contrib.auth import authenticate, login as loginsession
 from django.urls import path
+from django.contrib.auth.decorators import login_required
 
 # from User.models import UserModel
 # Create your views here.
@@ -64,7 +65,7 @@ def search_view(request):
     else:
             return render(request, 'result.html', {})
     
-    
+@login_required    
 def main(request):
     if request.method == 'GET' :
         return render(request, 'main.html')
