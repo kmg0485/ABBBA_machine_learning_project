@@ -2,7 +2,7 @@
 from django.shortcuts import render, redirect
 from Post.models import PostModel, CommentModel
 from django.http import HttpResponse
-from .machine import machine
+import simplejson as json
 # from User.models import UserModel
 # Create your views here.
 
@@ -10,7 +10,9 @@ def post_view(request, pk):
     if request.method == 'GET':
         current_post = PostModel.objects.get(pk=pk)
         current_comment = CommentModel.objects.filter(post_id = pk).order_by('-created_at')
-        return render(request, 'detail_post.html', {'post': current_post, 'comment':current_comment})
+        jsonDec = json.decoder.JSONDecoder()
+        tags = jsonDec.decode(current_post.tags)
+        return render(request, 'detail_post.html', {'post': current_post, 'comment':current_comment, 'tags' : tags})
         
 
 def delete_post(request, id):
