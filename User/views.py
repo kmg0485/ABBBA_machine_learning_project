@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+# from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .models import UserModel
 from django.contrib.auth import authenticate, login as loginsession
@@ -23,6 +23,6 @@ def login(request):
         user = authenticate(request, username=username, password=password)
         if user :
             loginsession(request, user)
-            return redirect('Post:search')
+            return redirect('Post:main')
         else : 
             return redirect('User:signup') # 로그인 기능 완성

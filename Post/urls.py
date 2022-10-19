@@ -14,5 +14,6 @@ urlpatterns = [
     path("upload/", views.upload_img, name="upload_img"),
     path("upload_cmt/<int:pk>/",views.upload_comment, name="upload_comment"),
     path("search/", views.search_view, name="search"),
-
+    path("main/", views.main, name="main"),
+    path('logout/',views.logout, name='logout'),
     ]
