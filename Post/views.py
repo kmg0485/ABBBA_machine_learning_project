@@ -2,6 +2,7 @@
 from django.shortcuts import render, redirect
 from Post.models import PostModel, CommentModel
 from django.http import HttpResponse
+from .machine import machine
 # from User.models import UserModel
 # Create your views here.
 
@@ -11,7 +12,6 @@ def post_view(request, pk):
         current_comment = CommentModel.objects.filter(post_id = pk).order_by('-created_at')
         return render(request, 'detail_post.html', {'post': current_post, 'comment':current_comment})
         
-
 
 def delete_post(request, id):
     post = PostModel.objects.get(id=id)
@@ -39,7 +39,7 @@ def upload_img(request) :
         post.photo = request.FILES['photo']
         post.save()
         post_id = post.id
-        return redirect('Post:post_view', post_id)
+        return redirect('Post:tags', post_id)
      
 def upload_comment(request, pk):
     if request.method == 'POST' :
