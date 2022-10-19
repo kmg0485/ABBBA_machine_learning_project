@@ -7,14 +7,16 @@ import os
 from uuid import uuid4
 from django.utils import timezone
 
+
 #태그
-from taggit.managers import TaggableManager
+# from taggit.managers import TaggableManager
 
 class PostModel(models.Model) :
     content = models.TextField()
     author = models.ForeignKey(UserModel, on_delete=models.CASCADE, default='')
     created_at = models.DateTimeField(auto_now_add=True)
     # tags = TaggableManager(blank=True)
+    tags = models.TextField()
    
     def upload_img(instance, filename):
         # upload_to="%Y/%m/%d" 처럼 날짜로 세분화
