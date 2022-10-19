@@ -25,8 +25,9 @@ def edit_post(request, id):
     if request.method == "POST":
         post.content = request.POST['content']
         post.photo = request.FILES['photo']
+        post.id = id
         post.save()
-        return redirect('Post:post_view', id)
+        return redirect('Post:tags', post.id)
     else:
         return render(request, 'edit_post.html', {'post':post})
         
