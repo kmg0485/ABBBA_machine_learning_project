@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from Post.models import PostModel, CommentModel
 #from django.http import HttpResponse
-from django.contrib.auth import authenticate, login as loginsession, logout
+from django.contrib.auth import authenticate, login as loginsession
 from django.urls import path
 
 # from User.models import UserModel
@@ -68,5 +68,3 @@ def search_view(request):
 def main(request):
     if request.method == 'GET' :
         return render(request, 'main.html')
-    
-    

@@ -2,6 +2,7 @@
 from django.shortcuts import render, redirect
 from .models import UserModel
 from django.contrib.auth import authenticate, login as loginsession
+from django.contrib import auth
 
 # Create your views here.
 def signup(request):
@@ -25,4 +26,9 @@ def login(request):
             loginsession(request, user)
             return redirect('Post:main')
         else : 
-            return redirect('User:signup') # 로그인 기능 완성
+            return redirect('User:login') # 로그인 기능 완성
+        
+
+def logout(request):
+    auth.logout(request)
+    return redirect('User:login') # 로그인 페이지로 이동
