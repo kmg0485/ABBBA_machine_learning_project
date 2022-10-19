@@ -1,4 +1,5 @@
 from django.urls import path
+from django.shortcuts import render, redirect
 from . import views
 from . import machine
 
@@ -17,4 +18,5 @@ urlpatterns = [
     path("search/", views.search_view, name="search"),
     path('main/', views.main_view, name='main'),
     path('upload/tags/<int:pk>', machine.machine, name='tags'),
+
     ]
