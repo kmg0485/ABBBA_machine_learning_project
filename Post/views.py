@@ -1,6 +1,6 @@
-
-from django.shortcuts import render, redirect
-from Post.models import PostModel, CommentModel
+from django.shortcuts import render, redirect,get_object_or_404
+from User.models import UserModel
+from .models import PostModel, CommentModel
 from django.http import HttpResponse
 import simplejson as json
 # from User.models import UserModel
@@ -76,3 +76,18 @@ def main_view(request) :
         feeds = PostModel.objects.all().order_by('-created_at')
         return render(request,'main.html',{'feeds':feeds})
 
+def likes(request, id):
+    post = get_object_or_404(PostModel, id=id)
+    user = request.user  
+    check_like_post = user.like_posts.filter(id=id)
+
+    if check_like_post.exists():
+        user.like_posts.remove(post)
+        post.like_count -= 1
+        post.save()
+        return redirect('Post:post_view',id)
+    else:
+        user.like_posts.add(post)
+        post.like_count += 1
+        post.save()
+        return redirect('Post:post_view',id)
