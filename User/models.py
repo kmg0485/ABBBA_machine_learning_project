@@ -5,3 +5,4 @@ from django.contrib.auth.models import AbstractUser
 # Create your models here.
 class UserModel(AbstractUser):
     nickname = models.CharField(max_length=500, blank=True)
+    kakao_id = models.CharField(max_length=256, null=True, blank=True)
