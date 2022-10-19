@@ -3,7 +3,10 @@ import torch
 import cv2
 
 from Post.models import PostModel
-from django.http import HttpResponse
+
+from django.shortcuts import render, redirect
+import simplejson as json
+
 
 
 def machine(request, pk) :
@@ -15,7 +18,15 @@ def machine(request, pk) :
     results.save()
     
     result = results.pandas().xyxy[0].to_numpy()
-    tags = []
+
+    auto_tags = []
     for k in result :
-        tags.append(k[6])
-    return HttpResponse(set(tags))
+        if k[6] not in auto_tags :
+            auto_tags.append(k[6])
+    
+    tag = PostModel.objects.get(pk=pk)
+    tag.tags = json.dumps(auto_tags)
+    tag.author = request.user
+    tag.save()
+    return redirect('Post:post_view', tag.id)
+
