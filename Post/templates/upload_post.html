@@ -318,6 +318,7 @@
           <form action="{% url 'Post:upload_img' %}" method="POST" class="post_form" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="title">NEW POST</div>
+            <div class="title" style="font-size: 20px;">{{ request.user }}님, 반가워요!</div>
             <div class="preview">
               <div class="upload">
                 <div class="post_btn">
