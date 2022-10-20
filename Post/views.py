@@ -73,7 +73,7 @@ def search_view(request):
         searched = request.GET.get('search') 
         photos = PostModel.objects.filter(tags__contains=searched)
         
-        paginator = Paginator(photos, 5) # 한 페이지에 게시글 15개
+        paginator = Paginator(photos, 12) # 한 페이지에 게시글 15개
         page = request.GET.get('page') # page에 해당하는 value 받아오기
         posts = paginator.get_page(page) # 받아온 value에 해당하는 페이지 반환
         
@@ -88,7 +88,7 @@ def main_view(request) :
     
     if request.method  == "GET":
         feeds = PostModel.objects.all().order_by('-created_at')
-        paginator = Paginator(feeds, 5) # 한 페이지에 게시글 15개
+        paginator = Paginator(feeds, 12) # 한 페이지에 게시글 15개
         page = request.GET.get('page') # page에 해당하는 value 받아오기
         posts = paginator.get_page(page) # 받아온 value에 해당하는 페이지 반환
         return render(request,'main.html',{'feeds':feeds, 'posts':posts})
