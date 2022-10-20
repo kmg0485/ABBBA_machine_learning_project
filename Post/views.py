@@ -80,7 +80,7 @@ def edit_comment(request, pk):
         comment = CommentModel.objects.get(pk=pk)
         comment.comment = request.POST.get("comment_content")
         comment.author = request.user
-        comment.post = PostModel.objects.get(pk=pk)
+        comment.post = PostModel.objects.get(pk=comment.post_id)
         comment.save()
         return redirect('Post:post_view', comment.post_id)
       
