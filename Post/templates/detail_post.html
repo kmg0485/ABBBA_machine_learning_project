@@ -184,6 +184,7 @@
                 <span id="home_button" class="material-symbols-rounded"
                 style="font-size: 30px; margin-right:10px; cursor : pointer;">home </span>
             </a>
+            <p>{{ request.user }}님, 반가워요!</p>
             <div>
 
 
@@ -196,7 +197,12 @@
                         src="{{post.photo.url}}" />
                 </div>
 
-                <div >
+
+                <div style="border-bottom : solid 2px gray;">
+                    <p>{{post.author.username}}님이 작성한 글입니다.</p>
+                    <p>{{post.content}}</p>
+
+
                     <div style="display: flex;">
                         {% if tags %}
                             <p>태그 : </p>
