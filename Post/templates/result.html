@@ -35,9 +35,11 @@
       <a href="{% url 'Post:main' %}">
         <button class="btn btn-outline-success" type="submit" style="color: #F93F4C; border-color: #F93F4C; ">전체
           보기</button>
+          <a href="{% url 'Post:upload_img' %}"><button class="btn btn-outline-success" type="submit">새 글 작성하기</button></a>
       </a>
     </div>
     </div>
+    <p>{{ request.user }}님, 반가워요!</p>
   </nav>
   ​
   <form class="d-flex" method="GET" action="{% url 'Post:search' %}">
@@ -45,25 +47,28 @@
       {% for photo in posts %}
       <div class="col">
         <div class="card">
-          <img class="card-img-top" alt="..." src="{{ photo.photo.url }}" />
+          <a href="{% url 'Post:post_view' photo.id %}">
+            <img class="card-img-top" alt="..." src="{{ photo.photo.url }}" />
+          </a>
+
         </div>
       </div>{% endfor %}
     </div>
   </form>
-  {% if posts.has_previous %}
-  <a href="?page=1&search={{searched}}">맨 앞으로</a>
-  <a href="?page={{ posts.previous_page_number }}&search={{searched}}">이전 페이지로</a>
-  {% endif %}
-  <span>{{ posts.number }}</span>
-  <span>/</span>
-  <span>{{ posts.paginator.num_pages }}</span>
-  {% if posts.has_next %}
-  <a href="?page={{posts.next_page_number}}&search={{searched}}">다음으로</a>
-  <a href="?page={{posts.paginator.num_pages}}&search={{searched}}">맨 뒤로</a>
-  {% endif %}
+      {% if posts.has_previous %}
+      <a href="?page=1&search={{searched}}">맨 앞으로</a>
+      <a href="?page={{ posts.previous_page_number }}&search={{searched}}">이전 페이지로</a>
+      {% endif %}
+      <span>{{ posts.number }}</span>
+      <span>/</span>
+      <span>{{ posts.paginator.num_pages }}</span>
+      {% if posts.has_next %}
+      <a href="?page={{posts.next_page_number}}&search={{searched}}">다음으로</a>
+      <a href="?page={{posts.paginator.num_pages}}&search={{searched}}">맨 뒤로</a>
+      {% endif %}
 
 
-  </div>
+ 
 </body>
 
 </html>
