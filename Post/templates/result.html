@@ -35,9 +35,11 @@
       <a href="{% url 'Post:main' %}">
         <button class="btn btn-outline-success" type="submit" style="color: #F93F4C; border-color: #F93F4C; ">전체
           보기</button>
+          <a href="{% url 'Post:upload_img' %}"><button class="btn btn-outline-success" type="submit">새 글 작성하기</button></a>
       </a>
     </div>
     </div>
+    <p>{{ request.user }}님, 반가워요!</p>
   </nav>
   ​
   <form class="d-flex" method="GET" action="{% url 'Post:search' %}">
