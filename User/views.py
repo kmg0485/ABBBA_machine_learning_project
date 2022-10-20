@@ -1,3 +1,4 @@
+
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from .models import UserModel
@@ -7,16 +8,16 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 
 
+
 # Create your views here.
 def signup(request):
     if request.method == "GET":
         return render(request, 'signup.html')
     elif request.method =="POST":
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+        username=request.POST.get('username')
+        password=request.POST.get('password')
         UserModel.objects.create_user(username=username, password=password)
-        return redirect("User:login")
-
+        return redirect('User:login')
 
 def login(request):
     if request.method == 'GET' :
@@ -27,9 +28,14 @@ def login(request):
         user = authenticate(request, username=username, password=password)
         if user :
             loginsession(request, user)
-            return redirect('Post:search')
+            return redirect('Post:main')
         else : 
-            return redirect('User:signup') # 로그인 기능 완성
+            return redirect('User:login') # 로그인 기능 완성
+        
+@login_required
+def logout(request):
+    auth.logout(request)
+    return redirect('User:login') # 로그인 페이지로 이동 
         
         
 def kakao_social_login(request):
@@ -93,3 +99,4 @@ def kakao_social_login_callback(request):
         user = UserModel.objects.get(kakao_id=kakao_id)
         auth.login(request, user)
     return redirect('Post:main')
+
