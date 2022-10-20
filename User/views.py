@@ -1,24 +1,28 @@
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from .models import UserModel
 from django.contrib.auth import authenticate, login as loginsession
 import requests
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
+from django.contrib.auth import get_user_model
 
-# Create your views here.
 def signup(request):
     if request.method == "GET":
         return render(request, 'signup.html')
     elif request.method =="POST":
         username=request.POST.get('username')
         password=request.POST.get('password')
+        
+        exist_user = get_user_model().objects.filter(username=username)
+        if exist_user :
+            return render(request, 'signup.html',{"msg" : "이미 존재하는 아이디입니다."})
         UserModel.objects.create_user(username=username, password=password)
         return redirect('User:login')
 
 def login(request):
     if request.method == 'GET' :
-        return render(request, 'signin.html') # url 주소가 아닌, html 파일이여서, 수정할 필요 없습니다.
+        return render(request, 'signin.html')
     elif request.method == 'POST' :
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -37,7 +41,7 @@ def logout(request):
         
 def kakao_social_login(request):
     """
-    카카오톧에 나의 애플리케이션의 정보를 담아 사용자에게 카카오 로그인 요청
+    카카오톡에 나의 애플리케이션의 정보를 담아 사용자에게 카카오 로그인 요청
     """
     if request.method == 'GET':
         client_id = '416dbc093af7d45fc2f47b28d0dd0e14'

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-     <!--google material icon-->
+    <!--google material icon-->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet"
@@ -16,7 +16,6 @@
         body {
             background: #f8f8f8;
         }
-
 
         .post_form {
             padding: 40px;
@@ -33,7 +32,6 @@
             text-align: center;
         }
 
-
         .post_form .preview {
             margin-bottom: 30px;
         }
@@ -48,11 +46,6 @@
             align-items: center;
             position: relative;
 
-        }
-
-
-        .post_form p {
-            margin-bottom: 20px;
         }
 
         .post_form input[type=file] {
@@ -78,13 +71,11 @@
             padding: 7px 8px 7px;
         }
 
-
-
         .submit_btn {
             background: #ffcbcb;
-            border-color: #000000;
+            border-color: #ffcbcb;
             color: black;
-            border-radius: 3px;
+            border-radius: 10px;
             border-style: solid;
             border-width: 1px;
             font-size: 14px;
@@ -111,21 +102,36 @@
 
         .comment_btn {
             background: #ffcbcb;
-            border-color: #000000;
+            border-color: #ffcbcb;
             color: black;
-            border-radius: 3px;
+            border-radius: 10px;
             border-style: solid;
             border-width: 1px;
             font-size: 14px;
             font-weight: 600;
             line-height: 28px;
             outline: none;
-            width: 15%;
+            width: 18%;
             height: 20%;
             padding: 0;
-            margin-top: 10px;
+            cursor: pointer;
+        }
+        .edit_btn{
+            
+            background: #ffcbcb;
+            border-color: #ffcbcb;
+            color: black;
+            border-radius: 10px;
+            border-style: solid;
+            border-width: 1px;
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 28px;
+            outline: none;
+            padding: 0;
+            width:170%;
             margin: 5px;
-            cursor:pointer;
+            cursor: pointer;
         }
 
         .comment_box {
@@ -144,151 +150,140 @@
             font-size: inherit;
             line-height: normal;
             vertical-align: middle;
-            background-color: pink;
+            background-color: #ffcbcb;
             cursor: pointer;
-            border: 1px solid pink;
+            border: 1px solid #ffcbcb;
             border-bottom-color: #e2e2e2;
-            border-radius: .25em;
-          }
-        
+            border-radius: 10px;
+            margin-top: 5px;
+        }
 
-        
-        .filebox input[type="submit"] {  
+        .filebox input[type="submit"] {
             position: absolute;
             width: 1px;
             height: 1px;
-            padding: 0;
             margin: -1px;
             overflow: hidden;
-            clip:rect(0,0,0,0);
+            clip: rect(0, 0, 0, 0);
             border: 0;
         }
-        .filebox label:hover{
-            border:2px solid gray;
+
+        .filebox label:hover {
+            border: 2px solid gray;
         }
 
-          
+        .submit_btn:hover {
+            border: 2px solid gray;
+        }
+
+        .comment_btn:hover {
+            border: 2px solid gray;
+        }
     </style>
 </head>
 
 <body>
-
-
     <section id="container">
-
-
-
-
-        <div style="border-radius:20px"id="main_container" class="post_form">
+        <div style="border-radius:20px" id="main_container" class="post_form">
+            <div style="text-align: center;">
             <a href="{% url 'Post:main' %}">
                 <span id="home_button" class="material-symbols-rounded"
-                style="font-size: 30px; margin-right:10px; cursor : pointer;">home </span>
+                    style="font-size: 30px; margin-right:10px; cursor : pointer;">home </span>
             </a>
-            <p>{{ request.user }}님, 반가워요!</p>
+        </div>
+            <p style="text-align: center;">{{ request.user }}님, 반가워요! 이 글은 {{post.author.username}}님이 작성한 글입니다.</p>
             <div>
-
-
-                {% csrf_token %}<div class="title">
-
-
+                {% csrf_token %}
+                <div class="title" style="width:98%; margin:auto;">
                 </div>
                 <div class="preview">
-                    <img style=" display:flex; object-fit: contain; max-width:600px; max-height:600px; margin:auto  "
+                    <img style=" display:flex; object-fit: contain; max-width:100%; max-height:600px; margin:auto  "
                         src="{{post.photo.url}}" />
                 </div>
-
-
-                <div style="display:flex; item-align:row;">
-                    <p>{{post.author.username}}님이 작성한 글입니다.</p>&nbsp&nbsp&nbsp&nbsp&nbsp
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="40" fill="currentColor" class="bi bi-hearts" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M4.931.481c1.627-1.671 5.692 1.254 0 5.015-5.692-3.76-1.626-6.686 0-5.015Zm6.84 1.794c1.084-1.114 3.795.836 0 3.343-3.795-2.507-1.084-4.457 0-3.343ZM7.84 7.642c2.71-2.786 9.486 2.09 0 8.358-9.487-6.268-2.71-11.144 0-8.358Z"/>
-                      </svg><span style="font-size:20px;padding-top:5px;"> : {{ post.like_count }}</span> &nbsp&nbsp&nbsp&nbsp
-                      {% if user.is_authenticated %}
-              <form action="{% url 'Post:likes' post.id %}" method='POST'>
-                {% csrf_token %}
-                {% if post in user.like_posts.all %}
-                <span class="filebox">
-                    <label for="ex_file">좋아요 취소</label>
-                    <input type="submit" id="ex_file"> 
-                </span>
-                {% else %}
-                <span class="filebox">
-                    <label for="ex_file">좋아요</label>
-                    <input type="submit" id="ex_file"> 
-                </span>
-                {% endif %}
-                </div>
-              </form>
-                    <div style="display: flex;">
-                        {% if tags %}
-                            <p>태그 : </p>
-                            {% for tag in tags %}
-                            <p style="border : solid 1px #ff6c6c; border-radius: 20px;">&nbsp{{ tag }}&nbsp</p>
-                            {% endfor %}
+                <div style="display:flex; justify-content: space-between;">
+                    <div style="display: flex;justify-content: space-between; width : 40%; margin: auto;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="40" fill="currentColor"
+                            class="bi bi-hearts" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M4.931.481c1.627-1.671 5.692 1.254 0 5.015-5.692-3.76-1.626-6.686 0-5.015Zm6.84 1.794c1.084-1.114 3.795.836 0 3.343-3.795-2.507-1.084-4.457 0-3.343ZM7.84 7.642c2.71-2.786 9.486 2.09 0 8.358-9.487-6.268-2.71-11.144 0-8.358Z" />
+                        </svg>
+                        <p>:</p><span style="font-size:20px;padding-top: 12px;">{{ post.like_count }}</span>
+                        {% if user.is_authenticated %}
+                        <form action="{% url 'Post:likes' post.id %}" method='POST'>
+                            {% csrf_token %}
+                            {% if post in user.like_posts.all %}
+                            <span class="filebox">
+                                <label for="ex_file">취소</label>
+                                <input type="submit" id="ex_file">
+                            </span>
                             {% else %}
-                            <p>자동 인식된 태그가 없습니다.</p>
+                            <span class="filebox">
+                                <label for="ex_file">좋아요</label>
+                                <input type="submit" id="ex_file">
+                            </span>
                             {% endif %}
-                        </div>
-                    <div style="border : solid 2px gray; border-radius: 10px;">
-                    <p style="font-size:15px;">&nbsp{{post.content}}</p>
                     </div>
-                    
-
+                    </form>
                 </div>
 
-                {% for cm in comment %}
-                <form action="{% url 'Post:delete_comment' cm.id %}" method="POST">
+                <div style="border : solid 2px gray; border-radius: 10px;">
+
+                    <div style="display: flex;width:100%;flex-wrap: wrap;">
+                        {% if tags %}
+                        {% for tag in tags %}
+                        &nbsp<p style="border : solid 1px #ff6c6c; border-radius: 20px;">&nbsp&nbsp{{ tag }}&nbsp&nbsp
+                        </p>&nbsp
+                        {% endfor %}
+                        {% else %}
+                        <p style="color : #ff6c6c;">&nbsp&nbsp자동 인식된 태그가 없습니다.</p>
+                        {% endif %}
+                        <div>
+                        </div>
+                        
+                    </div>
+                    <p style="font-size:15px;">&nbsp&nbsp{{post.content}}</p>
+                </div>
+
+                {% for cm in comment %}<div style="display: flex;">
+                <form style="width:80%;" action="{% url 'Post:delete_comment' cm.id %}" method="POST">
                     {% csrf_token %}
                     <div class="comment_box">
-                        <div style="display: flex;">
+                        <div style="display: flex;width:95%;">
                             <p>{{ cm.author.username }} :&nbsp </p>
                             <p> {{ cm.comment }}</p>
                         </div>
                         {% if user == cm.author %}
-                        <input class="comment_btn" type="submit" value="삭제">
+                        <input class="comment_btn" type="submit" style="margin: auto;" value="삭제">
                         {% endif %}
                     </div>
                 </form>
-                <form action="{% url 'Post:edit_comment' cm.id %}" method="POST">
+                <form style="margin: auto;" action="{% url 'Post:edit_comment' cm.id %}" method="POST">
                     {% csrf_token %}
-                    <input class="comment_btn" type="submit" value="수정">
+                    <input class="edit_btn" type="submit" value="수정">
                 </form>
-                {% endfor %}
-                
+                {% endfor %}</div>
                 <div>
-            
-                <form action="{% url 'Post:upload_comment' post.id %}" method="POST">
-                    {% csrf_token %}
-                    <p id="comment_box">
-                        <input style="width:80%;" name="comment_content" type="txt" placeholder="코멘트 입력창">
-                        <input class="comment_btn" type="submit" value="등록">
-                    </p>
-                </form>
-            {% endif %}
-                <div>
-               
-                    
-                   
-
+                    <form action="{% url 'Post:upload_comment' post.id %}" method="POST">
+                        {% csrf_token %}
+                        <p id="comment_box">
+                            <input style="width:80%;" name="comment_content" type="txt" placeholder="코멘트 입력창">
+                            <input class="comment_btn" type="submit" value="등록">
+                        </p>
+                    </form>
+                    {% endif %}
+                    <div>
+                    </div>
+                    {% if post.author == user %}
+                    <div class="buttons">
+                        <a href="{% url 'Post:edit-post' post.id %}"><input class="submit_btn" type="submit"
+                                value="게시글 수정"></a>
+                        <a href="{% url 'Post:delete-post' post.id %}"><input class="submit_btn" type="submit"
+                                value="게시글 삭제"></a>
+                    </div>
+                    {% endif %}
                 </div>
-                {% if post.author == user %}
-                <div class="buttons">
-
-                    <a href="{% url 'Post:edit-post' post.id %}"><input class="submit_btn" type="submit" value="게시글 수정"></a>
-                    <a href="{% url 'Post:delete-post' post.id %}"><input class="submit_btn" type="submit" value="게시글 삭제"></a>
-
-
-                </div>
-                {% endif %}
-
             </div>
-
-        </div>
-
-
     </section>
-
-
 </body>
 
 </html>

@@ -40,6 +40,7 @@
       padding-top: 0.5rem;
       padding-bottom: 0.5rem;
       position: relative;
+      flex-wrap: wrap;
     }
 
     .image {
@@ -97,7 +98,16 @@
 
 <body>
   <nav >
-    <p style="padding-top:1rem;">{{ request.user }}님, 반가워요!</p>
+    {% if user.is_authenticated %}
+    {{ request.user }}님, 반가워요!
+    {% else %}
+    <p style="margin:auto 0;" >가입을 아직 안 하셨네요!</p>
+    <div>
+      <a href="{% url 'User:signup' %}"><button style="border-radius:20px;" class="btn btn-outline-danger"
+          type="submit">SIGN UP</button></a>
+    </div>
+    {% endif %}
+    {% if user.is_authenticated %}
     <div>
       <a  href="{% url 'Post:upload_img' %}"><button style="border-radius:20px;" class="btn btn-outline-danger"
           type="submit">UPLOAD</button></a>
@@ -106,7 +116,7 @@
       <a href={% url 'User:logout' %}> <button style="border-radius:20px;" class="btn btn-outline-danger"
           type="submit">LOGOUT</button></a>
 
-    </div>
+    </div>{% endif %} 
     <form class="d-flex" method="GET" action="{% url 'Post:search' %}">
 
       {% csrf_token %}
