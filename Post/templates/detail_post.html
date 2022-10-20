@@ -183,6 +183,10 @@
                         <input class="comment_btn" type="submit" value="삭제">
                     </div>
                 </form>
+                <form action="{% url 'Post:edit_comment' cm.id %}" method="POST">
+                    {% csrf_token %}
+                    <input class="comment_btn" type="submit" value="수정">
+                </form>
                 {% endfor %}
                 </p>
                 좋아요 수 : {{ post.like_count }}
