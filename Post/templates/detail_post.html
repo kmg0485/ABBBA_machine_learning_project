@@ -96,8 +96,7 @@
 
         #comment_box {
             display: flex;
-            width: 100%;
-            justify-content: space-evenly;
+            justify-content: space-between;
         }
 
         .comment_btn {
@@ -179,6 +178,9 @@
         .comment_btn:hover {
             border: 2px solid gray;
         }
+        .edit_btn:hover {
+            border: 2px solid gray;
+        }
     </style>
 </head>
 
@@ -244,13 +246,13 @@
                     <p style="font-size:15px;">&nbsp&nbsp{{post.content}}</p>
                 </div>
 
-                {% for cm in comment %}<div style="display: flex;">
+                {% for cm in comment %}<div style="display: flex; width:100%; flex-wrap: wrap;">
                 <form style="width:80%;" action="{% url 'Post:delete_comment' cm.id %}" method="POST">
                     {% csrf_token %}
                     <div class="comment_box">
-                        <div style="display: flex;width:95%;">
+                        <div style="display: flex;width:95%;flex-wrap: wrap;">
                             <p>{{ cm.author.username }} :&nbsp </p>
-                            <p> {{ cm.comment }}</p>
+                            <p style="display: " > {{ cm.comment }}</p>
                         </div>
                         {% if user == cm.author %}
                         <input class="comment_btn" type="submit" style="margin: auto;" value="삭제">
@@ -262,7 +264,7 @@
                     <input class="edit_btn" type="submit" value="수정">
                 </form>
                 {% endfor %}</div>
-                <div>
+                <div style="width:100%;">
                     <form action="{% url 'Post:upload_comment' post.id %}" method="POST">
                         {% csrf_token %}
                         <p id="comment_box">
