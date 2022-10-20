@@ -1,9 +1,11 @@
-
-from django.shortcuts import render, redirect,get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from User.models import UserModel
 from .models import PostModel, CommentModel
-from django.http import HttpResponse
+from django.contrib.auth import authenticate, login as loginsession
 import simplejson as json
+from django.contrib.auth.decorators import login_required
+from django.urls import path
+
 # from User.models import UserModel
 
 # pagination
@@ -80,8 +82,8 @@ def search_view(request):
 @login_required    
 def main(request):
     if request.method == 'GET' :
-        return render(request, 'main.html')
-    
+        return render(request, 'main.html')   
+
 def main_view(request) :
     
     if request.method  == "GET":

@@ -19,4 +19,5 @@ urlpatterns = [
     path('main/', views.main_view, name='main'),
     path('upload/tags/<int:pk>', machine.machine, name='tags'),
     path('post_view/<int:id>/likes', views.likes, name='likes'),
+    
     ]
