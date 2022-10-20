@@ -1,9 +1,10 @@
-# from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from .models import UserModel
 from django.contrib.auth import authenticate, login as loginsession
-from django.contrib import auth
+import requests
 from django.contrib.auth.decorators import login_required
+from django.contrib import auth
 
 # Create your views here.
 def signup(request):
