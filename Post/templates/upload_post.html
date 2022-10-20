@@ -68,8 +68,8 @@
             img.id = "prev_" + previewId;
             img.classList.add("obj");
             img.file = file;
-            img.style.width = "300px"; //기본설정된 div의 안에 뿌려지는 효과를 주기 위해서 div크기와 같은 크기를 지정해준다.
-            img.style.height = "300px";
+            img.style.width = "350px"; //기본설정된 div의 안에 뿌려지는 효과를 주기 위해서 div크기와 같은 크기를 지정해준다.
+            img.style.height = "350px";
 
             preview.appendChild(img);
 
@@ -223,11 +223,15 @@
           <form action="{% url 'Post:upload_img' %}" method="POST" class="post_form" enctype="multipart/form-data" style="padding-bottom: 100px">
             {% csrf_token %}
             <div class="title">NEW POST</div>
+
             <div
               id="previewId"
               style="width: 350px; height: 350px; margin-left: 25px; margin-bottom: 50px; font-size: 9pt; border: 2px solid #ffcbcb; left: 300px; top: 200px"
             ></div>
             <input type="file" name="photo" onchange="previewImage(this,'previewId')" />
+
+            <div class="title" style="font-size: 20px;">{{ request.user }}님, 반가워요!</div>
+            
             <p>
               <textarea
                 name="content"

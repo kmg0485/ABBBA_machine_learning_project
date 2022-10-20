@@ -1,4 +1,3 @@
-
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from .models import UserModel
@@ -6,8 +5,6 @@ from django.contrib.auth import authenticate, login as loginsession
 import requests
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
-
-
 
 # Create your views here.
 def signup(request):
@@ -99,4 +96,3 @@ def kakao_social_login_callback(request):
         user = UserModel.objects.get(kakao_id=kakao_id)
         auth.login(request, user)
     return redirect('Post:main')
-
