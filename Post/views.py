@@ -1,12 +1,17 @@
-from django.shortcuts import render, redirect,get_object_or_404
+
+from django.shortcuts import render, redirect, get_object_or_404
 from User.models import UserModel
 from .models import PostModel, CommentModel
-from django.http import HttpResponse
+from django.contrib.auth import authenticate, login as loginsession
 import simplejson as json
+from django.contrib.auth.decorators import login_required
+from django.urls import path
+
 # from User.models import UserModel
 
 # pagination
 from django.core.paginator import Paginator
+
 
 def post_view(request, pk):
     if request.method == 'GET':
@@ -21,6 +26,7 @@ def delete_post(request, id):
     post = PostModel.objects.get(id=id)
     post.delete()
     return redirect('Post:search')
+
 
 def edit_post(request, id):
     post = PostModel.objects.get(id=id)
@@ -45,6 +51,7 @@ def upload_img(request) :
         post.save()
         post_id = post.id
         return redirect('Post:tags', post_id)
+     
      
 def upload_comment(request, pk):
     if request.method == 'POST' :
@@ -74,6 +81,7 @@ def search_view(request):
         return render(request, 'result.html', {'searched': searched, 'photos': photos, 'posts' : posts})
     
     
+
 def main_view(request) :
     
     if request.method  == "GET":
@@ -102,3 +110,4 @@ def likes(request, id):
             return redirect('Post:post_view',id)
     else:
             return redirect('user:login')
+
