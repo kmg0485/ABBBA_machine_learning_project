@@ -198,8 +198,29 @@
                 </div>
 
 
-                <div style="border-bottom : solid 2px gray;">
-                    <p>{{post.author.username}}님이 작성한 글입니다.</p>
+                <div style="display:flex; item-align:row;">
+                    <p>{{post.author.username}}님이 작성한 글입니다.</p>&nbsp&nbsp&nbsp&nbsp&nbsp
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="40" fill="currentColor" class="bi bi-hearts" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M4.931.481c1.627-1.671 5.692 1.254 0 5.015-5.692-3.76-1.626-6.686 0-5.015Zm6.84 1.794c1.084-1.114 3.795.836 0 3.343-3.795-2.507-1.084-4.457 0-3.343ZM7.84 7.642c2.71-2.786 9.486 2.09 0 8.358-9.487-6.268-2.71-11.144 0-8.358Z"/>
+                      </svg><span style="font-size:20px;padding-top:5px;"> : {{ post.like_count }}</span> &nbsp&nbsp&nbsp&nbsp
+                      {% if user.is_authenticated %}
+              <form action="{% url 'Post:likes' post.id %}" method='POST'>
+                {% csrf_token %}
+                {% if post in user.like_posts.all %}
+                <span class="filebox">
+                    <label for="ex_file">좋아요 취소</label>
+                    <input type="submit" id="ex_file"> 
+                </span>
+                {% else %}
+                <span class="filebox">
+                    <label for="ex_file">좋아요</label>
+                    <input type="submit" id="ex_file"> 
+                </span>
+                {% endif %}
+                </div>
+              </form>
+       
+                    <p></p>
                     <p>{{post.content}}</p>
 
 
@@ -238,28 +259,9 @@
                     <input class="comment_btn" type="submit" value="수정">
                 </form>
                 {% endfor %}
-                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-hearts" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M4.931.481c1.627-1.671 5.692 1.254 0 5.015-5.692-3.76-1.626-6.686 0-5.015Zm6.84 1.794c1.084-1.114 3.795.836 0 3.343-3.795-2.507-1.084-4.457 0-3.343ZM7.84 7.642c2.71-2.786 9.486 2.09 0 8.358-9.487-6.268-2.71-11.144 0-8.358Z"/>
-                  </svg> : {{ post.like_count }}
-                <p></p>
+                
                 <div>
-            {% if user.is_authenticated %}
-              <form action="{% url 'Post:likes' post.id %}" method='POST'>
-                {% csrf_token %}
-                {% if post in user.like_posts.all %}
-                <div class="filebox">
-                    <label for="ex_file">좋아요 취소</label>
-                    <input type="submit" id="ex_file"> 
-                </div>
-                {% else %}
-                <div class="filebox">
-                    <label for="ex_file">좋아요</label>
-                    <input type="submit" id="ex_file"> 
-                </div>
-                {% endif %}
-                </div>
-              </form>
-       
+            
                 <form action="{% url 'Post:upload_comment' post.id %}" method="POST">
                     {% csrf_token %}
                     <p id="comment_box">

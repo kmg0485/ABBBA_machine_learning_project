@@ -1,4 +1,5 @@
 from xml.etree.ElementTree import Comment
+
 from django.shortcuts import render, redirect, get_object_or_404
 from User.models import UserModel
 from .models import PostModel, CommentModel
@@ -83,29 +84,25 @@ def edit_comment(request, pk):
         comment.post = PostModel.objects.get(pk=comment.post_id)
         comment.save()
         return redirect('Post:post_view', comment.post_id)
-      
    
 def search_view(request):
     if request.method == 'GET':
         searched = request.GET.get('search') 
         photos = PostModel.objects.filter(tags__contains=searched)
         
-        paginator = Paginator(photos, 12) # 한 페이지에 게시글 15개
+        paginator = Paginator(photos, 5) # 한 페이지에 게시글 15개
         page = request.GET.get('page') # page에 해당하는 value 받아오기
         posts = paginator.get_page(page) # 받아온 value에 해당하는 페이지 반환
         
         return render(request, 'result.html', {'searched': searched, 'photos': photos, 'posts' : posts})
     
-@login_required    
-def main(request):
-    if request.method == 'GET' :
-        return render(request, 'main.html')   
+    
 
 def main_view(request) :
     
     if request.method  == "GET":
         feeds = PostModel.objects.all().order_by('-created_at')
-        paginator = Paginator(feeds, 12) # 한 페이지에 게시글 15개
+        paginator = Paginator(feeds, 5) # 한 페이지에 게시글 15개
         page = request.GET.get('page') # page에 해당하는 value 받아오기
         posts = paginator.get_page(page) # 받아온 value에 해당하는 페이지 반환
         return render(request,'main.html',{'feeds':feeds, 'posts':posts})
@@ -126,5 +123,4 @@ def likes(request, id):
         post.save()
         return redirect('Post:post_view',id)
    
-
 
