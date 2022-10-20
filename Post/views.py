@@ -26,7 +26,7 @@ def post_view(request, pk):
 def delete_post(request, id):
     post = PostModel.objects.get(id=id)
     post.delete()
-    return redirect('Post:search')
+    return redirect('Post:main')
 
 
 def edit_post(request, id):
