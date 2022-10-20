@@ -27,7 +27,7 @@
         </form>
         <div style="display: flex; justify-content: space-between; width: 400px">
 
-          <button class="btn btn-outline-success" type="submit">새 글 작성하기</button>
+          <a href="{% url 'Post:upload_img' %}"><button class="btn btn-outline-success" type="submit">새 글 작성하기</button></a>
         </div>
         <div>
           <a href={% url 'User:logout' %}> <button class="btn btn-outline-success" type="submit">로그아웃</button></a>
