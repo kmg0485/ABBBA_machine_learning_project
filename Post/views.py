@@ -1,4 +1,3 @@
-
 from django.shortcuts import render, redirect, get_object_or_404
 from User.models import UserModel
 from .models import PostModel, CommentModel
@@ -80,7 +79,10 @@ def search_view(request):
         
         return render(request, 'result.html', {'searched': searched, 'photos': photos, 'posts' : posts})
     
-    
+@login_required    
+def main(request):
+    if request.method == 'GET' :
+        return render(request, 'main.html')   
 
 def main_view(request) :
     
@@ -107,4 +109,5 @@ def likes(request, id):
         post.save()
         return redirect('Post:post_view',id)
    
+
 
