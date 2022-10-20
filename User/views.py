@@ -31,4 +31,4 @@ def login(request):
 @login_required
 def logout(request):
     auth.logout(request)
-    return redirect('User:login') # 로그인 페이지로 이동
+    return redirect('User:login') # 로그인 페이지로 이동 
