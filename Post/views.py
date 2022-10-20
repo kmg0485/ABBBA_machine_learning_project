@@ -1,3 +1,4 @@
+from xml.etree.ElementTree import Comment
 
 from django.shortcuts import render, redirect, get_object_or_404
 from User.models import UserModel
@@ -68,6 +69,21 @@ def delete_comment(request, pk):
         post_id = comment.post_id
         comment.delete()
         return redirect('Post:post_view', post_id)
+
+def edit_comment_view(request, pk):
+    if request.method == 'POST':
+        comment = CommentModel.objects.get(pk=pk)
+
+    return render(request, 'edit_comment.html', {'comment':comment})
+
+def edit_comment(request, pk):
+    if request.method == 'POST':
+        comment = CommentModel.objects.get(pk=pk)
+        comment.comment = request.POST.get("comment_content")
+        comment.author = request.user
+        comment.post = PostModel.objects.get(pk=pk)
+        comment.save()
+        return redirect('Post:post_view', comment.post_id)
    
 def search_view(request):
     if request.method == 'GET':
