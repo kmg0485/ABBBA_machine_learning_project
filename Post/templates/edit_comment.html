@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+    <title>Machine Learning</title>
+    <style>
+        body {
+            background: #f8f8f8;
+        }
+
+
+        .post_form {
+            padding: 40px;
+            background-color: #fff;
+            border: 1px solid #e6e6e6;
+            margin: 10vh auto 0 auto;
+            width: 50vw;
+        }
+
+        .post_form .title {
+            margin: 0 10px 40px;
+            font-weight: 400;
+            font-size: 30px;
+            text-align: center;
+        }
+
+        .submit_btn {
+            background: #ffcbcb;
+            border-color: #000000;
+            color: black;
+            border-radius: 3px;
+            border-style: solid;
+            border-width: 1px;
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 28px;
+            outline: none;
+            width: 100%;
+            padding: 0;
+            margin-top: 10px;
+            margin: 5px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        #comment_box {
+            display: flex;
+            width: 100%;
+            justify-content: space-evenly;
+        }
+
+        .comment_btn {
+            background: #ffcbcb;
+            border-color: #000000;
+            color: black;
+            border-radius: 3px;
+            border-style: solid;
+            border-width: 1px;
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 28px;
+            outline: none;
+            width: 15%;
+            height: 20%;
+            padding: 0;
+            margin-top: 10px;
+            margin: 5px;
+        }
+
+        .comment_box {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+
+<body>
+
+    <section id="container">
+
+        <div id="main_container" class="post_form">
+            <div>
+                {% csrf_token %}
+                <div class="title">
+                    EDIT COMMENT
+                </div>
+                <form action="{% url 'Post:edit_cmt' comment.id %}" method="POST">
+                    {% csrf_token %}
+                    <p id="comment_box">
+                        <input style="width:80%;" name="comment_content" type="txt" placeholder="comment" value="{{ comment.comment }}">
+                        <input class="comment_btn" type="submit" value="댓글 수정">
+                    </p>
+                </form>
+            </div>
+        </div>
+
+    </section>
+
+
+</body>
+
+</html>
