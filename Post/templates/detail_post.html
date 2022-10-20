@@ -188,6 +188,7 @@
                 좋아요 수 : {{ post.like_count }}
                 <p></p>
                 <div>
+            {% if user.is_authenticated %}
               <form action="{% url 'Post:likes' post.id %}" method='POST'>
                 {% csrf_token %}
                 {% if post in user.like_posts.all %}
@@ -197,6 +198,7 @@
                 {% endif %}
                 </div>
               </form>
+            {% endif %}
                 <form action="{% url 'Post:upload_comment' post.id %}" method="POST">
                     {% csrf_token %}
                     <p id="comment_box">
