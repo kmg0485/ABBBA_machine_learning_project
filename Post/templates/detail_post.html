@@ -181,6 +181,10 @@
         .edit_btn:hover {
             border: 2px solid gray;
         }
+        a {
+            text-decoration: none;
+            color : #ff6c6c;
+        }
     </style>
 </head>
 
@@ -233,8 +237,8 @@
                     <div style="display: flex;width:100%;flex-wrap: wrap;">
                         {% if tags %}
                         {% for tag in tags %}
-                        &nbsp<p style="border : solid 1px #ff6c6c; border-radius: 20px;">&nbsp&nbsp{{ tag }}&nbsp&nbsp
-                        </p>&nbsp
+                        <a href="{% url 'Post:search' %}?search={{tag}}">&nbsp<p style="border : solid 1px #ff6c6c; border-radius: 20px;">&nbsp&nbsp{{ tag }}&nbsp&nbsp
+                        </p>&nbsp</a>
                         {% endfor %}
                         {% else %}
                         <p style="color : #ff6c6c;">&nbsp&nbsp자동 인식된 태그가 없습니다.</p>
