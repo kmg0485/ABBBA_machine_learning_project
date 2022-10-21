@@ -7,19 +7,25 @@ from . import machine
 app_name = 'Post'
 
 urlpatterns = [
-   
-
-    path('post_view/<int:pk>/',views.post_view, name="post_view"),
-    path('post_view/<int:id>/delete/',views.delete_post, name='delete-post'),
-    path('post_view/<int:id>/edit/',views.edit_post, name='edit-post'),
-    path("upload/", views.upload_img, name="upload_img"),
-    path("post_view/upload_cmt/<int:pk>/",views.upload_comment, name="upload_comment"),
-    path("post_view/delete_cmt/<int:pk>",views.delete_comment, name="delete_comment"),
-    path("post_view/edit_cmt/<int:pk>",views.edit_comment_view, name="edit_comment"),
-    path("post_view/edit_cmt/edit/<int:pk>",views.edit_comment, name="edit_cmt"),
-    path("search/", views.search_view, name="search"),
-    path('main/', views.main_view, name='main'),
-    path('upload/tags/<int:pk>', machine.machine, name='tags'),
-    path('post_view/<int:id>/likes', views.likes, name='likes'),
+    # 태그 생성 함수 호출
+    path('<int:pk>/tags/', machine.machine, name='tags'),
     
+    #페이지 띄우는 함수 호출
+    path("", views.main_view, name='main'),
+    path("tags/", views.search_view, name="search"),
+    path('<int:pk>/',views.post_view, name="post_view"),
+    path("comment/<int:pk>",views.edit_comment_view, name="edit_comment"),
+    
+    # 게시글 관련 함수 호출
+    path("upload/", views.upload_img, name="upload_img"),
+    path('<int:id>/delete/',views.delete_post, name='delete-post'),
+    path('<int:id>/edit/',views.edit_post, name='edit-post'),
+    
+    # 코멘트 관련 함수 호출
+    path("<int:pk>/comment/",views.upload_comment, name="upload_comment"),
+    path("comment/<int:pk>/edit",views.edit_comment, name="edit_cmt"),
+    path("comment/<int:pk>/delete",views.delete_comment, name="delete_comment"),
+    
+    # 좋아요 관련 함수 호출
+    path('<int:id>/likes', views.likes, name='likes'),
     ]

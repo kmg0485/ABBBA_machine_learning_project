@@ -4,26 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
 
-    <!-- Facebook Meta Tags / 페이스북 오픈 그래프 -->
-    <meta property="og:url" content="http://kindtiger.dothome.co.kr/insta" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="instagram" />
-    <meta property="og:description" content="instagram clone" />
-    <meta property="og:image" content="http://kindtiger.dothome.co.kr/insta/imgs/instagram.jpeg" />
-    .
-    <!-- Twitter Meta Tags / 트위터 -->
-    <meta name="twitter:card" content="instagram clone" />
-    <meta name="twitter:title" content="instagram" />
-    <meta name="twitter:description" content="instagram clone" />
-    <meta name="twitter:image" content="http://kindtiger.dothome.co.kr/insta/imgs/instagram.jpeg" />
-
-    <!-- Google / Search Engine Tags / 구글 검색 엔진 -->
-    <meta itemprop="name" content="instagram" />
-    <meta itemprop="description" content="instagram clone" />
-    <meta itemprop="image" content="http://kindtiger.dothome.co.kr/insta/imgs/instagram.jpeg" />
-
-    <title>Machine Learning</title>
-    <link rel="shortcut icon" href="../../imgs/instagram.png" />
+    <title>ABBBA’s Memory,,,</title>
     <style>
       body {
         background: #f8f8f8;
@@ -38,31 +19,10 @@
 
       #main_container {
         /*height: 100vh;*/
-        padding-top: 135px;
+        padding-top: 20px;
         display: flex;
         justify-content: center;
-        order: 1;
-      }
-
-      #main_container .b_inner {
-        width: 935px;
-        position: relative;
-      }
-
-      #main_container {
-        padding-top: 130px;
-        display: flex;
-        justify-content: center;
-      }
-
-      #main_container .inner {
-        width: 935px;
-        /*height: 500px;*/
-        /*background: red;*/
-        position: relative;
-      }
-
-      .contents_box {
+        align-items: center;
       }
 
       .contents {
@@ -80,144 +40,12 @@
         padding: 10px 20px;
       }
 
-      .contents .top .profile_img {
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        overflow: hidden;
-        margin-right: 10px;
-      }
-
-      .contents .top .profile_img img {
-        width: 100%;
-      }
-
-      .contents .top .user_container {
-        display: flex;
-      }
-
-      .contents .sprite_more_icon {
-        position: relative;
-      }
-
-      .contents .toggle_box {
-        text-align: center;
-        position: absolute;
-        right: 0;
-        top: 20px;
-        border: 1px solid rgba(0, 0, 0, 0.09);
-        border-radius: 3px;
-        display: none;
-      }
-
-      .contents .sprite_more_icon.on .toggle_box {
-        display: block;
-      }
-
-      .contents .toggle_box > li {
-        padding: 5px 10px;
-        background: white;
-      }
-
-      .contents .toggle_box > li input {
-        border: none;
-        font-size: inherit;
-      }
-
-      .contents .img_section {
-        overflow: hidden;
-      }
-
-      .contents .img_section img {
-        width: 100%;
-      }
-
-      .contents .bottom_icons {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px 20px;
-      }
-
-      .contents .bottom_icons .left_icons {
-        display: flex;
-      }
-
-      .contents .bottom_icons .left_icons > div {
-        margin-right: 10px;
-        cursor: pointer;
-      }
-
-      .contents .bottom_icons .right_icon > div {
-        cursor: pointer;
-      }
-
-      .sprite_heart_icon_outline.on {
-        background: url("../../imgs/background01.png") no-repeat -26px -261px;
-      }
-
-      .contents .likes {
-        padding: 5px 20px;
-        color: #262626;
-      }
-
-      .contents .comment_container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 5px 20px;
-      }
-
-      .contents .comment_container .comment {
-        display: flex;
-        flex-direction: column;
-        font-size: 14px;
-      }
-
-      .contents .comment_container .comment-detail {
-        display: flex;
-      }
-
-      .contents .comment_container .comment .nick_name {
-        margin-right: 10px;
-      }
-
-      .contents .timer {
-        font-size: 10px;
-        letter-spacing: 0.2px;
-        color: #999;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.09);
-        padding: 10px 20px;
-      }
-
-      .contents .comment_field {
-        min-height: 56px;
-        padding: 0 20px;
-        position: relative;
-      }
-
-      .contents .comment_field input {
-        width: 100%;
-        height: 56px;
-        border: none;
-        outline: none;
-        background: transparent;
-      }
-
-      .contents .comment_field input:focus ~ .upload_btn {
-        pointer-events: initial;
-        opacity: 1;
-      }
-
-      #main_container {
-        padding-top: 220px;
-      }
-
       .post_form {
         padding: 40px;
         background-color: #fff;
         border: 1px solid #e6e6e6;
         margin: 0 0 10px;
+        width: 100%;
       }
 
       .post_form .title {
@@ -225,21 +53,7 @@
         font-weight: 400;
         font-size: 30px;
         text-align: center;
-      }
-
-      .post_form .preview {
-        margin-bottom: 30px;
-      }
-
-      .post_form .preview .upload {
-        max-width: 300px;
-        height: 300px;
-        border: 1px solid #e6e6e6;
-        margin: 0 auto;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
+        color: #ffcbcb;
       }
 
       .plus_icon {
@@ -278,7 +92,7 @@
         box-sizing: border-box;
         color: #262626;
         font-size: 14px;
-        padding: 7px 8px;
+        padding: 7px 8px 7px;
       }
 
       .post_form textarea {
@@ -289,7 +103,7 @@
         box-sizing: border-box;
         color: #262626;
         font-size: 14px;
-        padding: 7px 8px;
+        padding: 7px 8px 7px;
       }
 
       .submit_btn {
@@ -305,6 +119,7 @@
         outline: none;
         width: 100%;
         padding: 0;
+        margin-top: 10px;
         margin: 5px;
       }
     </style>
@@ -313,12 +128,13 @@
   <body>
     <section id="container">
       <div id="main_container">
-        <div class="post_form_container">
+        <div class="post_form_container" style="border-radius: 10px">
           <form action="{% url 'Post:edit-post' post.id %}" method="POST" class="post_form" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="title">EDIT POST</div>
-            <div class="preview">
-              <img style="display: flex; width: 100%; max-width: 400px; max-height: 400px; margin: auto" src="{{post.photo.url}}" />
+            <div class="title" style="font-size: 20px">{{ request.user }}님, 반가워요!</div>
+            <div class="preview" style="width: 100%">
+              <img style="display: flex; object-fit: contain; max-width: 700px; max-height: 1000px; margin: auto" src="{{post.photo.url}}" />
               <canvas id="imageCanvas"></canvas>
             </div>
             <p>

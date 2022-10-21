@@ -1,14 +1,8 @@
-from xml.etree.ElementTree import Comment
-
 from django.shortcuts import render, redirect, get_object_or_404
-from User.models import UserModel
 from .models import PostModel, CommentModel
 from django.contrib.auth import authenticate, login as loginsession
 import simplejson as json
 from django.contrib.auth.decorators import login_required
-from django.urls import path
-
-# from User.models import UserModel
 
 # pagination
 from django.core.paginator import Paginator
@@ -16,8 +10,9 @@ from django.core.paginator import Paginator
 
 def post_view(request, pk):
     if request.method == 'GET':
-        current_post = PostModel.objects.get(pk=pk)
-        current_comment = CommentModel.objects.filter(post_id = pk).order_by('-created_at')
+        current_post = PostModel.objects.get(pk=pk) # 해당하는 게시글 불러오기
+        current_comment = CommentModel.objects.filter(post_id = pk).order_by('-created_at') # 게시글에 해당하는 코멘트들 불러오기
+        # 필드에 저장된 JSON을 다시 리스트 타입 데이터로 변환 
         jsonDec = json.decoder.JSONDecoder()
         tags = jsonDec.decode(current_post.tags)
         return render(request, 'detail_post.html', {'post': current_post, 'comment':current_comment, 'tags' : tags})
@@ -26,7 +21,7 @@ def post_view(request, pk):
 def delete_post(request, id):
     post = PostModel.objects.get(id=id)
     post.delete()
-    return redirect('Post:search')
+    return redirect('Post:main')
 
 
 def edit_post(request, id):
@@ -73,15 +68,14 @@ def delete_comment(request, pk):
 def edit_comment_view(request, pk):
     if request.method == 'POST':
         comment = CommentModel.objects.get(pk=pk)
-
-    return render(request, 'edit_comment.html', {'comment':comment})
+        return render(request, 'edit_comment.html', {'comment':comment})
 
 def edit_comment(request, pk):
     if request.method == 'POST':
         comment = CommentModel.objects.get(pk=pk)
         comment.comment = request.POST.get("comment_content")
         comment.author = request.user
-        comment.post = PostModel.objects.get(pk=pk)
+        comment.post = PostModel.objects.get(pk=comment.post_id)
         comment.save()
         return redirect('Post:post_view', comment.post_id)
    
@@ -90,22 +84,20 @@ def search_view(request):
         searched = request.GET.get('search') 
         photos = PostModel.objects.filter(tags__contains=searched)
         
-        paginator = Paginator(photos, 5) # 한 페이지에 게시글 15개
+        paginator = Paginator(photos, 12) # 한 페이지에 게시글 12개
         page = request.GET.get('page') # page에 해당하는 value 받아오기
         posts = paginator.get_page(page) # 받아온 value에 해당하는 페이지 반환
         
-        return render(request, 'result.html', {'searched': searched, 'photos': photos, 'posts' : posts})
-    
-    
+        return render(request, 'result.html', {'searched': searched, 'posts' : posts})
+
 
 def main_view(request) :
-    
     if request.method  == "GET":
         feeds = PostModel.objects.all().order_by('-created_at')
-        paginator = Paginator(feeds, 5) # 한 페이지에 게시글 15개
+        paginator = Paginator(feeds, 12) # 한 페이지에 게시글 12개
         page = request.GET.get('page') # page에 해당하는 value 받아오기
         posts = paginator.get_page(page) # 받아온 value에 해당하는 페이지 반환
-        return render(request,'main.html',{'feeds':feeds, 'posts':posts})
+        return render(request,'main.html',{'posts':posts})
 
 def likes(request, id):
     post = get_object_or_404(PostModel, id=id)
