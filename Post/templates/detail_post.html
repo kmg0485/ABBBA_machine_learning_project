@@ -206,6 +206,7 @@
                     <img style=" display:flex; object-fit: contain; max-width:100%; max-height:600px; margin:auto  "
                         src="{{post.photo.url}}" />
                 </div>
+
                 <div style="display:flex; justify-content: space-between;">
                     <div style="display: flex;justify-content: space-between; width : 40%; margin: auto;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="40" fill="currentColor"
@@ -248,6 +249,7 @@
                         
                     </div>
                     <p style="font-size:15px;">&nbsp&nbsp{{post.content}}</p>
+
                 </div>
 
                 {% for cm in comment %}<div style="display: flex; width:100%; flex-wrap: wrap;">
@@ -263,12 +265,17 @@
                         {% endif %}
                     </div>
                 </form>
+                {% if user == cm.author %}
                 <form style="margin: auto;" action="{% url 'Post:edit_comment' cm.id %}" method="POST">
                     {% csrf_token %}
                     <input class="edit_btn" type="submit" value="수정">
                 </form>
-                {% endfor %}</div>
+
+                {% endif %}
+                {% endfor %}
+
                 <div style="width:100%;">
+                {% if user.is_authenticated %}
                     <form action="{% url 'Post:upload_comment' post.id %}" method="POST">
                         {% csrf_token %}
                         <p id="comment_box">
