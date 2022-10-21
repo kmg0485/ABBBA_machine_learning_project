@@ -40,6 +40,7 @@
       padding-top: 0.5rem;
       padding-bottom: 0.5rem;
       position: relative;
+      flex-wrap: wrap;
     }
 
     .image {
@@ -97,7 +98,8 @@
 
 <body>
   <nav >
-    <p style="padding-top:1rem;">{{ request.user }}님, 반가워요!</p>
+    {{ request.user }}님, 반가워요!
+    {% if user.is_authenticated %}
     <div>
       <a  href="{% url 'Post:upload_img' %}"><button style="border-radius:20px;" class="btn btn-outline-danger"
           type="submit">UPLOAD</button></a>
@@ -107,6 +109,7 @@
           type="submit">LOGOUT</button></a>
 
     </div>
+    {% endif %}
     <form class="d-flex" method="GET" action="{% url 'Post:search' %}">
 
       {% csrf_token %}
