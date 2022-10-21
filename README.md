@@ -26,17 +26,13 @@ Django, 머신러닝 사물 인식 알고리즘 중 YOLO v5 를 사용하여 업
 </br></br></br>
 
 >### 와이어프레임
-<img width="1032" alt="스크린샷 2022-10-17 11 39 24" src="
-https://user-images.githubusercontent.com/18550082/197095801-c32b31e7-de86-4674-85b7-c116ae6d5d32.png
-">
+![스크린샷 2022-10-21 12 16 22](https://user-images.githubusercontent.com/108252926/197103556-02e5e6fd-8857-4ad2-a931-f90971b222cc.png)
 
 </br></br></br>
 
 
 >### API
-<img width="913" alt="스크린샷 2022-10-21 오전 11 02 32" src="
-https://user-images.githubusercontent.com/18550082/197094097-ff51ed5f-6f33-4ee1-851d-ce7a72361616.png
-">
+![스크린샷 2022-10-21 12 16 31](https://user-images.githubusercontent.com/108252926/197103637-f25f74b8-3a5d-4821-a224-918432e33975.png)
 
 
 </br></br></br>
