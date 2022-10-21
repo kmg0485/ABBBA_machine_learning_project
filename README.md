@@ -7,7 +7,7 @@
 실시간 이미지 컨텐츠 기록. 그리고 지난 세월의 추억 담을 수 있는</br>
 *ABBBA's Memory,,,* 프로젝트 입니다.
 </br></br>
-
+프로젝트 노션 https://www.notion.so/e0e71073855e44f78a5ae8708814ca20
 </div>
 </br></br></br>
 
