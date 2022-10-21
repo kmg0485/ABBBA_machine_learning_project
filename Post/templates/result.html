@@ -118,8 +118,6 @@
 
     </div>{% endif %} 
     <form class="d-flex" method="GET" action="{% url 'Post:search' %}">
-
-      {% csrf_token %}
       <input style="border-radius: 20px;" value="{{ searched }}" class="form-control me-2" type="search" placeholder="Search"
         name="search" aria-label="Search" style="width: 800px" />
       <button style="border-radius: 20px;" class="btn btn-outline-danger" type="submit">SEARCH</button>
@@ -134,7 +132,8 @@
   </nav>
 
   <div id="container">
-    {% for feed in posts %}
+    {% for post in posts %}
+    {% for feed in post %}
     <div>
       <div>
         <a href="{% url 'Post:post_view' feed.id %}">
@@ -144,18 +143,19 @@
     </div>
     {% endfor %}
     <div id="pagination">
-      {% if posts.has_previous %}
+      {% if post.has_previous %}
       <a href="?page=1&search={{searched}}">맨앞</a>&nbsp; 
-      <a href="?page={{ posts.previous_page_number }}&search={{searched}}">이전</a>&nbsp; 
+      <a href="?page={{ post.previous_page_number }}&search={{searched}}">이전</a>&nbsp; 
       {% endif %}
-      <span>{{ posts.number }}</span>
+      <span>{{ post.number }}</span>
       <span>/</span>
-      <span>{{ posts.paginator.num_pages }}</span>&nbsp; 
-      {% if posts.has_next %}
-      <a href="?page={{posts.next_page_number}}&search={{searched}}">다음</a>&nbsp; 
-      <a href="?page={{posts.paginator.num_pages}}&search={{searched}}">맨뒤</a>
+      <span>{{ post.paginator.num_pages }}</span>&nbsp; 
+      {% if post.has_next %}
+      <a href="?page={{post.next_page_number}}&search={{searched}}">다음</a>&nbsp; 
+      <a href="?page={{post.paginator.num_pages}}&search={{searched}}">맨뒤</a>
       {% endif %}
     </div>
+    {% endfor %}
   </div>
 
 
