@@ -101,8 +101,7 @@ https://user-images.githubusercontent.com/18550082/197094097-ff51ed5f-6f33-4ee1-
 저희는 스파르타코딩클럽 내일배움캠프 3기 5인으로 구성된 팀입니다.
 |**김민규**|오민규|윤민성|윤장미|이금빈|
 |:---:|:---:|:---:|:---:|:---:|
-|Contact:[:electric_plug:](
-https://kmg0485.tistory.com/)%7CContact:[:bulb:](https://dhalsrbbbbbbb.tistory.com/)%7CContact:[:computer:](https://tweakycoding.tistory.com/)%7CContact:[:sunglasses:](https://velog.io/@r5zyoon)%7CContact:[:sparkling_heart:](https://lgb9811.tistory.com/)%7C
+|Contact:[:electric_plug:](https://kmg0485.tistory.com/) | Contact:[:bulb:](https://dhalsrbbbbbbb.tistory.com/) | Contact:[:computer:](https://tweakycoding.tistory.com/) | Contact:[:sunglasses:](https://velog.io/@r5zyoon) | Contact:[:sparkling_heart:](https://lgb9811.tistory.com/) |
 
 </br>
 </br>
