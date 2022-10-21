@@ -217,26 +217,25 @@
                     <input type="submit" id="ex_file"> 
                 </span>
                 {% endif %}
-                </div>
+                
               </form>
-       
-                    <p></p>
-                    <p>{{post.content}}</p>
+              {% endif %}
+            </div>
 
 
-                    <div style="display: flex;">
-                        {% if tags %}
-                            <p>태그 : </p>
-                            {% for tag in tags %}
-                            <p style="border : solid 1px #ff6c6c; border-radius: 20px;">&nbsp{{ tag }}&nbsp</p>
-                            {% endfor %}
-                            {% else %}
-                            <p>자동 인식된 태그가 없습니다.</p>
-                            {% endif %}
-                        </div>
-                    <div style="border : solid 2px gray; border-radius: 10px;">
-                    <p style="font-size:15px;">&nbsp{{post.content}}</p>
+                <div style="display: flex;">
+                    {% if tags %}
+                        <p>태그 : </p>
+                        {% for tag in tags %}
+                        <p style="border : solid 1px #ff6c6c; border-radius: 20px;">&nbsp{{ tag }}&nbsp</p>
+                        {% endfor %}
+                        {% else %}
+                        <p>자동 인식된 태그가 없습니다.</p>
+                        {% endif %}
                     </div>
+                <div style="border : solid 2px gray; border-radius: 10px;">
+                <p style="font-size:15px;">&nbsp{{post.content}}</p>
+                </div>
                     
 
                 </div>
@@ -253,11 +252,13 @@
                         <input class="comment_btn" type="submit" value="삭제">
                         {% endif %}
                     </div>
-                </form>
+                </form> 
+                {% if user == cm.author %}
                 <form action="{% url 'Post:edit_comment' cm.id %}" method="POST">
                     {% csrf_token %}
                     <input class="comment_btn" type="submit" value="수정">
                 </form>
+                {% endif %}
                 {% endfor %}
                 
                 <div>
@@ -269,7 +270,7 @@
                         <input class="comment_btn" type="submit" value="등록">
                     </p>
                 </form>
-            {% endif %}
+            
                 <div>
                
                     
