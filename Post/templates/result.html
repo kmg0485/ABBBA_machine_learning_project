@@ -75,11 +75,10 @@
 
     #pagination {
       grid-area: footer;
-      grid-column: 2/4;
-      grid-row: 4/5;
+      grid-column: 1/5;
       text-align: center;
       padding-top:5vh;
-      padding-bottom : 30vh;
+      padding-bottom : 5vh;
       font-size: larger;
     }
 
@@ -118,8 +117,6 @@
 
     </div>{% endif %} 
     <form class="d-flex" method="GET" action="{% url 'Post:search' %}">
-
-      {% csrf_token %}
       <input style="border-radius: 20px;" value="{{ searched }}" class="form-control me-2" type="search" placeholder="Search"
         name="search" aria-label="Search" style="width: 800px" />
       <button style="border-radius: 20px;" class="btn btn-outline-danger" type="submit">SEARCH</button>
@@ -134,11 +131,11 @@
   </nav>
 
   <div id="container">
-    {% for feed in posts %}
+    {% for post in posts %}
     <div>
       <div>
-        <a href="{% url 'Post:post_view' feed.id %}">
-          <img style="border-radius: 20px;" src="{{ feed.photo.url }}" alt="..." class="image" />
+        <a href="{% url 'Post:post_view' post.id %}">
+          <img style="border-radius: 20px;" src="{{ post.photo.url }}" alt="..." class="image" />
         </a>
       </div>
     </div>

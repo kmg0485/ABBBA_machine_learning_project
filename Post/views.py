@@ -78,16 +78,18 @@ def edit_comment(request, pk):
         comment.post = PostModel.objects.get(pk=comment.post_id)
         comment.save()
         return redirect('Post:post_view', comment.post_id)
-   
+ 
 def search_view(request):
     if request.method == 'GET':
-        searched = request.GET.get('search') 
-        photos = PostModel.objects.filter(tags__contains=searched)
-        
-        paginator = Paginator(photos, 12) # 한 페이지에 게시글 12개
+        searched = request.GET.get('search')
+        results = searched.split(',')
+        search = []
+        for result in results :
+            photos = PostModel.objects.filter(tags__contains=result)
+            search += photos
+        paginator = Paginator(search, 12) # 한 페이지에 게시글 12개
         page = request.GET.get('page') # page에 해당하는 value 받아오기
-        posts = paginator.get_page(page) # 받아온 value에 해당하는 페이지 반환
-        
+        posts = paginator.get_page(page)
         return render(request, 'result.html', {'searched': searched, 'posts' : posts})
 
 
