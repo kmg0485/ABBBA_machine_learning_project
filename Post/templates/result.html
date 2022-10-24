@@ -75,11 +75,10 @@
 
     #pagination {
       grid-area: footer;
-      grid-column: 2/4;
-      grid-row: 4/5;
+      grid-column: 1/5;
       text-align: center;
       padding-top:5vh;
-      padding-bottom : 30vh;
+      padding-bottom : 5vh;
       font-size: larger;
     }
 
@@ -133,29 +132,27 @@
 
   <div id="container">
     {% for post in posts %}
-    {% for feed in post %}
     <div>
       <div>
-        <a href="{% url 'Post:post_view' feed.id %}">
-          <img style="border-radius: 20px;" src="{{ feed.photo.url }}" alt="..." class="image" />
+        <a href="{% url 'Post:post_view' post.id %}">
+          <img style="border-radius: 20px;" src="{{ post.photo.url }}" alt="..." class="image" />
         </a>
       </div>
     </div>
     {% endfor %}
     <div id="pagination">
-      {% if post.has_previous %}
+      {% if posts.has_previous %}
       <a href="?page=1&search={{searched}}">맨앞</a>&nbsp; 
-      <a href="?page={{ post.previous_page_number }}&search={{searched}}">이전</a>&nbsp; 
+      <a href="?page={{ posts.previous_page_number }}&search={{searched}}">이전</a>&nbsp; 
       {% endif %}
-      <span>{{ post.number }}</span>
+      <span>{{ posts.number }}</span>
       <span>/</span>
-      <span>{{ post.paginator.num_pages }}</span>&nbsp; 
-      {% if post.has_next %}
-      <a href="?page={{post.next_page_number}}&search={{searched}}">다음</a>&nbsp; 
-      <a href="?page={{post.paginator.num_pages}}&search={{searched}}">맨뒤</a>
+      <span>{{ posts.paginator.num_pages }}</span>&nbsp; 
+      {% if posts.has_next %}
+      <a href="?page={{posts.next_page_number}}&search={{searched}}">다음</a>&nbsp; 
+      <a href="?page={{posts.paginator.num_pages}}&search={{searched}}">맨뒤</a>
       {% endif %}
     </div>
-    {% endfor %}
   </div>
 
 

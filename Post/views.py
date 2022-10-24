@@ -86,12 +86,11 @@ def search_view(request):
         search = []
         for result in results :
             photos = PostModel.objects.filter(tags__contains=result)
-        
-            paginator = Paginator(photos, 12) # 한 페이지에 게시글 12개
-            page = request.GET.get('page') # page에 해당하는 value 받아오기
-            posts = paginator.get_page(page)
-            search.append(posts)# 받아온 value에 해당하는 페이지 반환
-        return render(request, 'result.html', {'searched': searched, 'posts' : search})
+            search += photos
+        paginator = Paginator(search, 12) # 한 페이지에 게시글 12개
+        page = request.GET.get('page') # page에 해당하는 value 받아오기
+        posts = paginator.get_page(page)
+        return render(request, 'result.html', {'searched': searched, 'posts' : posts})
 
 
 def main_view(request) :
