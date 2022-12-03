@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 from django.contrib.auth import get_user_model
 
+
 def signup(request):
     if request.method == "GET":
         return render(request, 'signup.html')
@@ -20,6 +21,7 @@ def signup(request):
         UserModel.objects.create_user(username=username, password=password)
         return redirect('User:login')
 
+
 def login(request):
     if request.method == 'GET' :
         return render(request, 'signin.html')
@@ -31,12 +33,13 @@ def login(request):
             loginsession(request, user)
             return redirect('Post:main')
         else : 
-            return redirect('User:login') # 로그인 기능 완성
+            return redirect('User:login')
+        
         
 @login_required
 def logout(request):
     auth.logout(request)
-    return redirect('User:login') # 로그인 페이지로 이동 
+    return redirect('User:login')
         
         
 def kakao_social_login(request):
@@ -50,6 +53,7 @@ def kakao_social_login(request):
         return redirect(
             f'https://kauth.kakao.com/oauth/authorize?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code'
         )
+
 
 def kakao_social_login_callback(request):
     """
@@ -84,6 +88,7 @@ def kakao_social_login_callback(request):
     profile_request = requests.get(
         "https://kapi.kakao.com/v2/user/me", headers={"Authorization": f"Bearer {access_token}"},
     )
+    
     #------사용자 정보를 활용---------------#
     profile_json = profile_request.json()
     kakao_id = profile_json.get('id')

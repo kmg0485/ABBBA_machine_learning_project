@@ -1,15 +1,11 @@
 # 모델링
 from django.db import models
 
-
 # 사진
 import os
 from uuid import uuid4
 from django.utils import timezone
-from django.conf import settings
 
-#태그
-# from taggit.managers import TaggableManager
 
 class PostModel(models.Model) :
     content = models.TextField()
@@ -39,6 +35,7 @@ class PostModel(models.Model) :
 
     def __str__(self):
         return str(F'{self.author.username}의 글 내용 : {self.content}')
+
 
 class CommentModel(models.Model) :
     author = models.ForeignKey('User.UserModel', on_delete=models.CASCADE)

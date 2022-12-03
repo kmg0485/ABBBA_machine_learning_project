@@ -1,5 +1,4 @@
 from django.urls import path
-from django.shortcuts import render, redirect
 from . import views
 from . import machine
 
@@ -20,6 +19,7 @@ urlpatterns = [
     path("upload/", views.upload_img, name="upload_img"),
     path('<int:id>/delete/',views.delete_post, name='delete-post'),
     path('<int:id>/edit/',views.edit_post, name='edit-post'),
+    
     
     # 코멘트 관련 함수 호출
     path("<int:pk>/comment/",views.upload_comment, name="upload_comment"),

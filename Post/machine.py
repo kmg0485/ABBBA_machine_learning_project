@@ -8,7 +8,6 @@ from django.shortcuts import redirect
 import simplejson as json
 
 
-
 def machine(request, pk) :
     model = torch.hub.load('ultralytics/yolov5', 'yolov5s', pretrained=True)
     post = PostModel.objects.get(pk=pk) # PostModel의 인스턴스 생성 후 해당 게시글을 가져온다.
