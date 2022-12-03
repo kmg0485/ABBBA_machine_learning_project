@@ -12,7 +12,6 @@ class PostModel(models.Model) :
     author = models.ForeignKey('User.UserModel', on_delete=models.CASCADE, default='')
     created_at = models.DateTimeField(auto_now_add=True)
     like_count = models.PositiveIntegerField(default=0, )
-    # tags = TaggableManager(blank=True)
     tags = models.TextField()
    
     def upload_img(instance, filename):

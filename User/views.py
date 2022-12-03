@@ -34,7 +34,7 @@ def login(request):
             return redirect('Post:main')
         else : 
             return redirect('User:login')
-        
+
         
 @login_required
 def logout(request):
