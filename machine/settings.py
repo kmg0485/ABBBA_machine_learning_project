@@ -1,7 +1,6 @@
-
-
 from pathlib import Path
 import os
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -12,8 +11,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -26,8 +23,10 @@ INSTALLED_APPS = [
     'Post',
 ]
 
+
 TAGGIT_CASE_INSENSITIVE = True
 TAGGIT_LIMIT = 50
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -40,6 +39,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'machine.urls'
+
 
 TEMPLATES = [
     {
@@ -57,11 +57,11 @@ TEMPLATES = [
     },
 ]
 
+
 WSGI_APPLICATION = 'machine.wsgi.application'
 
 
 # Database
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -71,7 +71,6 @@ DATABASES = {
 
 
 # Password validation
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -89,7 +88,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # Internationalization
-
 LANGUAGE_CODE = 'ko-kr'
 
 TIME_ZONE = 'Asia/Seoul'
@@ -102,12 +100,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 
 STATIC_URL = 'static/'
-
-# Default primary key field type
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+# Default primary key field type
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# 커스텀 유저모델 지정
 AUTH_USER_MODEL = 'User.UserModel'

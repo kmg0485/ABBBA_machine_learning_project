@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from Post.models import PostModel
+
 
 class UserModel(AbstractUser):
     nickname = models.CharField(max_length=500, blank=True)

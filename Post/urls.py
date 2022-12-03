@@ -20,6 +20,7 @@ urlpatterns = [
     path('<int:id>/delete/',views.delete_post, name='delete-post'),
     path('<int:id>/edit/',views.edit_post, name='edit-post'),
     
+    
     # 코멘트 관련 함수 호출
     path("<int:pk>/comment/",views.upload_comment, name="upload_comment"),
     path("comment/<int:pk>/edit",views.edit_comment, name="edit_cmt"),
