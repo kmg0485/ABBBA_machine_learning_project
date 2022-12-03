@@ -31,12 +31,12 @@ def login(request):
             loginsession(request, user)
             return redirect('Post:main')
         else : 
-            return redirect('User:login') # 로그인 기능 완성
+            return redirect('User:login')
         
 @login_required
 def logout(request):
     auth.logout(request)
-    return redirect('User:login') # 로그인 페이지로 이동 
+    return redirect('User:login')
         
         
 def kakao_social_login(request):

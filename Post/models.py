@@ -9,14 +9,12 @@ from django.utils import timezone
 from django.conf import settings
 
 #태그
-# from taggit.managers import TaggableManager
 
 class PostModel(models.Model) :
     content = models.TextField()
     author = models.ForeignKey('User.UserModel', on_delete=models.CASCADE, default='')
     created_at = models.DateTimeField(auto_now_add=True)
     like_count = models.PositiveIntegerField(default=0, )
-    # tags = TaggableManager(blank=True)
     tags = models.TextField()
    
     def upload_img(instance, filename):
