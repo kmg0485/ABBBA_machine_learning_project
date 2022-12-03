@@ -1,5 +1,4 @@
 from django.urls import path
-from django.shortcuts import render, redirect
 from . import views
 from . import machine
 
